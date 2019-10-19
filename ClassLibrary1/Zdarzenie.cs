@@ -10,17 +10,17 @@ namespace ClassLibrary1
     {
         private Wykaz _wykaz;
         private OpisStanu _opisStanu;
-        private DateTime _checkoutDate;
+        private DateTime _dataWypozyczenia;
 
-        public Zdarzenie(Wykaz wykaz, OpisStanu opisStanu, DateTime checkoutDate)
+        public Zdarzenie(Wykaz wykaz, OpisStanu opisStanu, DateTime dataWypozyczenia)
         {
             _wykaz = wykaz;
             _opisStanu = opisStanu;
-            _checkoutDate = checkoutDate;
+            _dataWypozyczenia = dataWypozyczenia;
         }
 
         public Wykaz Wykaz { get; private set; }
         public OpisStanu OpisStanu { get; private set; }
-        public DateTime CheckoutDate { get; private set; }
+        public DateTime DataWypozyczenia { get; private set; }
     }
 }

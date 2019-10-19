@@ -9,17 +9,16 @@ namespace ClassLibrary1
 {
     class DataContext
     {
-        private List<Wykaz> _wykazy;
-        private Dictionary<int, Katalog> _katalogi;
-        private ObservableCollection<Zdarzenie> _zdarzenia;
-        private List<OpisStanu> _opisyStanu;
+        private List<Wykaz> _wykazy = new List<Wykaz>();
+        private Dictionary<int, Katalog> _katalogi = new Dictionary<int, Katalog>();
+        private ObservableCollection<Zdarzenie> _zdarzenia = new ObservableCollection<Zdarzenie>();
+        private List<OpisStanu> _opisyStanu = new List<OpisStanu>();
 
-        public DataContext()
-        {
-            _wykazy = new List<Wykaz>();
-            _katalogi = new Dictionary<int, Katalog>();
-            _zdarzenia = new ObservableCollection<Zdarzenie>();
-            _opisyStanu = new List<OpisStanu>();
-        }
+        public List<Wykaz> Wykazy { get; set; }
+        public Dictionary<int, Katalog> Katalogi { get; set; }
+        public ObservableCollection<Zdarzenie> Zdarzenia { get; set; }
+        public List<OpisStanu> OpisyStanu { get; set; }
+
+
     }
 }

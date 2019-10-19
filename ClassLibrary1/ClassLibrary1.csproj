@@ -41,8 +41,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataContext.cs" />
+    <Compile Include="DataRepository.cs" />
+    <Compile Include="IDataFiller.cs" />
     <Compile Include="Katalog.cs" />
     <Compile Include="Wykaz.cs" />
+    <Compile Include="WypelnianieStalymi.cs" />
     <Compile Include="Zdarzenie.cs" />
     <Compile Include="OpisStanu.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
