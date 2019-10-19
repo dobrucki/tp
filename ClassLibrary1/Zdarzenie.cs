@@ -12,6 +12,13 @@ namespace ClassLibrary1
         private OpisStanu _opisStanu;
         private DateTime _checkoutDate;
 
+        public Zdarzenie(Wykaz wykaz, OpisStanu opisStanu, DateTime checkoutDate)
+        {
+            _wykaz = wykaz;
+            _opisStanu = opisStanu;
+            _checkoutDate = checkoutDate;
+        }
+
         public Wykaz Wykaz { get; private set; }
         public OpisStanu OpisStanu { get; private set; }
         public DateTime CheckoutDate { get; private set; }
