@@ -36,10 +36,7 @@ namespace ClassLibrary1
 
         public void DeleteKatalog(int i)
         {
-            foreach(Katalog k in _dataContext.Katalogi)
-            {
-                if()
-            }
+            
         }
 
 
