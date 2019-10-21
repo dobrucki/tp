@@ -16,11 +16,11 @@ namespace ClassLibrary1
             dataContext.Wykazy.Add(new Wykaz("Kinga", "Sierakowska", "4"));
             dataContext.Wykazy.Add(new Wykaz("Bartek", "Piguł", "5"));
 
-            dataContext.Katalogi.Add(0, new Katalog("Quo Vaids", "Henryk", "Sienkiewcz", "1"));
-            dataContext.Katalogi.Add(1, new Katalog("Latarnik", "Henryk", "Sienkiewcz", "2"));
-            dataContext.Katalogi.Add(2, new Katalog("Krzyżacy", "Henryk", "Sienkiewcz", "3"));
-            dataContext.Katalogi.Add(3, new Katalog("Pani Twardowska", "Adam", "Mickiewicz", "4"));
-            dataContext.Katalogi.Add(4, new Katalog("Burza", "Henryk", "Sienkiewcz", "5"));
+            dataContext.Katalogi.Add(0, new Katalog("Quo Vaids", "Henryk", "Sienkiewcz"));
+            dataContext.Katalogi.Add(1, new Katalog("Latarnik", "Henryk", "Sienkiewcz"));
+            dataContext.Katalogi.Add(2, new Katalog("Krzyżacy", "Henryk", "Sienkiewcz"));
+            dataContext.Katalogi.Add(3, new Katalog("Pani Twardowska", "Adam", "Mickiewicz"));
+            dataContext.Katalogi.Add(4, new Katalog("Burza", "Henryk", "Sienkiewcz"));
 
             for(int i=0; i<5; i++)
             {
