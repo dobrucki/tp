@@ -30,13 +30,15 @@ namespace ClassLibrary1
             return _dataContext.Katalogi.Values;
         }
 
-        //Update nie wiem co możemy updatować
+        public void UpdateKatalog(int id, Katalog pozycja)
+        {
+            _dataContext.Katalogi[id] = pozycja;
+        }
         
 
-
-        public void DeleteKatalog(int i)
+        public void DeleteKatalog(int id)
         {
-            
+            _dataContext.Katalogi.Remove(id);
         }
 
 
