@@ -51,20 +51,22 @@ namespace ClassLibrary1
 
         public Wykaz GetWykaz(String id)
         {
-            foreach(Wykaz w in _dataContext.Wykazy)
-            {
-                if (w.IdWykazu == id) return w;
-                
-            }
-
-            throw new Exception("Brak wykazu o podanym ID");
-            
+            return _dataContext.Wykazy.Find(x => x.IdWykazu.Equals(id));    
         }
 
         public IEnumerable<Wykaz> GetAllWykaz()
         {
             return _dataContext.Wykazy;
+        }
 
+        public void UpdateWykaz(int id, Wykaz element)
+        {
+            _dataContext.Wykazy.Insert(id, element);
+        }
+
+        public void DeleteWykaz(Wykaz element)
+        {
+            _dataContext.Wykazy.Remove(element);
         }
 
 
