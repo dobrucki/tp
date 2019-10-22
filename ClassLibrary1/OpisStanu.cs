@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary1
 {
-    class OpisStanu
+    public class OpisStanu
     {
         private Katalog _katalog;
         private int _liczbaSztuk;

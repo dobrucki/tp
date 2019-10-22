@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary1
 {
-    class DataContext
+    public class DataContext
     {
         public List<Wykaz> Wykazy = new List<Wykaz>();
         public Dictionary<int, Katalog> Katalogi = new Dictionary<int, Katalog>();

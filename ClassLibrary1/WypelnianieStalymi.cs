@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary1
 {
-    class WypelnianieStalymi : IDataFiller
+    public class WypelnianieStalymi : IDataFiller
     {
         public void Fill(DataContext dataContext)
         {   

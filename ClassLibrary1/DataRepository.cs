@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary1
 {
-    class DataRepository
+    public class DataRepository
     {
         private DataContext _dataContext;
 

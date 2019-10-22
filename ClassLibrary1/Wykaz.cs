@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary1
 {
-    class Wykaz // Czytelnik
+    public class Wykaz // Czytelnik
     {
         private string _firstName;
         private string _lastName;

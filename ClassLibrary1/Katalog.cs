@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary1
 {
-    class Katalog
+    public class Katalog
     {
         private string _tytul;
         private string _imieAutora;
