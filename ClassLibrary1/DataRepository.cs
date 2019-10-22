@@ -8,12 +8,14 @@ namespace ClassLibrary1
 {
     class DataRepository
     {
-        private DataContext _dataContext = new DataContext();
+        private DataContext _dataContext;
 
         public DataRepository(IDataFiller filler)
         {
-            filler.Fill(_dataContext); // Nie wiem czy to zadziała
+            _dataContext = new DataContext();
+            filler.Fill(_dataContext);
         }
+
         //CRUD Katalog
         public void AddKatalog(Katalog pozycja)
         {
@@ -34,14 +36,11 @@ namespace ClassLibrary1
         {
             _dataContext.Katalogi[id] = pozycja;
         }
-        
 
         public void DeleteKatalog(int id)
         {
             _dataContext.Katalogi.Remove(id);
         }
-
-
 
         //CRUD Wykaz
         public void AddWykaz(Wykaz element)
