@@ -16,18 +16,19 @@ namespace ClassLibrary1
             dataContext.Wykazy.Add(new Wykaz("Kinga", "Sierakowska", new Guid("5f9ad251-b8dc-48c6-a027-f67c37fa6f09")));
             dataContext.Wykazy.Add(new Wykaz("Bartek", "Piguł", new Guid("ca761232-ed42-11ce-bacd-00aa0057b223")));
 
-            dataContext.Katalogi.Add(0, new Katalog("Quo Vaids", "Henryk", "Sienkiewcz"));
-            dataContext.Katalogi.Add(1, new Katalog("Latarnik", "Henryk", "Sienkiewcz"));
-            dataContext.Katalogi.Add(2, new Katalog("Krzyżacy", "Henryk", "Sienkiewcz"));
-            dataContext.Katalogi.Add(3, new Katalog("Pani Twardowska", "Adam", "Mickiewicz"));
-            dataContext.Katalogi.Add(4, new Katalog("Burza", "Henryk", "Sienkiewcz"));
+            dataContext.Katalogi.Add(new Guid("b9b713a2-93ac-4696-96d9-ce1257b8835d"), new Katalog("Quo Vaids", "Henryk", "Sienkiewcz", new Guid("b9b713a2-93ac-4696-96d9-ce1257b8835d")));
+            dataContext.Katalogi.Add(new Guid("1df6b044-901b-452c-909e-4acdd52c1ba5"), new Katalog("Latarnik", "Henryk", "Sienkiewcz", new Guid("1df6b044-901b-452c-909e-4acdd52c1ba5")));
+            dataContext.Katalogi.Add(new Guid("ab23a3c2-9dba-4a8a-aacf-daba29cf7000"), new Katalog("Krzyżacy", "Henryk", "Sienkiewcz", new Guid("ab23a3c2-9dba-4a8a-aacf-daba29cf7000")));
+            dataContext.Katalogi.Add(new Guid("842f8c3e-878b-48f9-bc31-d50cd2be22da"), new Katalog("Pani Twardowska", "Adam", "Mickiewicz", new Guid("842f8c3e-878b-48f9-bc31-d50cd2be22da")));
+            dataContext.Katalogi.Add(new Guid("c448467b-17ab-450b-8f64-1450022762ed"), new Katalog("Burza", "Henryk", "Sienkiewcz", new Guid("c448467b-17ab-450b-8f64-1450022762ed")));
 
-            for(int i=0; i<5; i++)
-            {
-                dataContext.OpisyStanu.Add(new OpisStanu(dataContext.Katalogi[i], i + 5, DateTime.Today));
-            }
+            dataContext.OpisyStanu.Add(new OpisStanu(dataContext.Katalogi[new Guid("b9b713a2-93ac-4696-96d9-ce1257b8835d")], 10, DateTime.Today));
+            dataContext.OpisyStanu.Add(new OpisStanu(dataContext.Katalogi[new Guid("1df6b044-901b-452c-909e-4acdd52c1ba5")], 15, DateTime.Today));
+            dataContext.OpisyStanu.Add(new OpisStanu(dataContext.Katalogi[new Guid("ab23a3c2-9dba-4a8a-aacf-daba29cf7000")], 20, DateTime.Today));
+            dataContext.OpisyStanu.Add(new OpisStanu(dataContext.Katalogi[new Guid("842f8c3e-878b-48f9-bc31-d50cd2be22da")], 0, DateTime.Today));
+            dataContext.OpisyStanu.Add(new OpisStanu(dataContext.Katalogi[new Guid("c448467b-17ab-450b-8f64-1450022762ed")], 1, DateTime.Today));
 
-            for(int i=0; i<5; i++)
+            for (int i=0; i<5; i++)
             {
                 dataContext.Zdarzenia.Add(new Zdarzenie(dataContext.Wykazy[i], dataContext.OpisyStanu[i], DateTime.Today));
             }

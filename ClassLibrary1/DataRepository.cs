@@ -19,12 +19,26 @@ namespace ClassLibrary1
         //CRUD Katalog
         public void AddKatalog(Katalog pozycja)
         {
-            _dataContext.Katalogi.Add(_dataContext.Katalogi.Keys.Count, pozycja);
+            if(_dataContext.Katalogi.ContainsKey(pozycja.IdKatalogu))
+            {
+                throw new Exception("Jest już dodany katalog o podanym Id!");
+            }
+            else
+            {
+                _dataContext.Katalogi.Add(pozycja.IdKatalogu, pozycja);
+            }
         }
 
-        public Katalog GetKatalog(int id)
+        public Katalog GetKatalog(Guid id)
         {
-            return _dataContext.Katalogi[id];
+            if (_dataContext.Katalogi.ContainsKey(id))
+            {
+                return _dataContext.Katalogi[id];
+            }
+            else
+            {
+                throw new Exception("Brak katalogu o podanym Id!");
+            }
         }
 
         public IEnumerable<Katalog> GetAllKatalog()
@@ -32,14 +46,29 @@ namespace ClassLibrary1
             return _dataContext.Katalogi.Values;
         }
 
-        public void UpdateKatalog(int id, Katalog pozycja)
+        public void UpdateKatalog(Guid id, Katalog pozycja)
         {
-            _dataContext.Katalogi[id] = pozycja;
+            if (_dataContext.Katalogi.ContainsKey(id))
+            {
+                _dataContext.Katalogi[id] = pozycja;
+            }
+            else
+            {
+                throw new Exception("Brak katalogu o podanym Id!");
+            }
+
         }
 
-        public void DeleteKatalog(int id)
+        public void DeleteKatalog(Guid id) // Jak zabezpieczamy przed Katalogiem który posiada opis stanu? 
         {
-            _dataContext.Katalogi.Remove(id);
+            if (_dataContext.Katalogi.ContainsKey(id))
+            {
+                _dataContext.Katalogi.Remove(id);
+            }
+            else
+            {
+                throw new Exception("Brak katalogu o podanym Id!");
+            }
         }
 
         //CRUD Wykaz
@@ -88,6 +117,12 @@ namespace ClassLibrary1
 
 
         }
+
+        //CRUD OPIS STANU
+        // ...
+        //CRUD ZDARZENIE
+        //...
+
 
     }
 }

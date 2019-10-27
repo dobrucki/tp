@@ -10,7 +10,7 @@ namespace ClassLibrary1
     public class DataContext
     {
         public List<Wykaz> Wykazy = new List<Wykaz>();
-        public Dictionary<int, Katalog> Katalogi = new Dictionary<int, Katalog>();
+        public Dictionary<Guid, Katalog> Katalogi = new Dictionary<Guid, Katalog>();
         public ObservableCollection<Zdarzenie> Zdarzenia = new ObservableCollection<Zdarzenie>();
         public List<OpisStanu> OpisyStanu = new List<OpisStanu>();
     }
