@@ -45,12 +45,23 @@ namespace ClassLibrary1
         //CRUD Wykaz
         public void AddWykaz(Wykaz element)
         {
+            if (_dataContext.Wykazy.Any(wyk => wyk.IdWykazu == element.IdWykazu))
+            {
+                throw new Exception("Jest już wykaz o podanym Id");
+            }
+
             _dataContext.Wykazy.Add(element);
         }
 
         public Wykaz GetWykaz(Guid id)
         {
-            return _dataContext.Wykazy.Find(x => x.IdWykazu.Equals(id));    
+            if (_dataContext.Wykazy.Any(wyk => wyk.IdWykazu == id))
+            {
+                return _dataContext.Wykazy.Find(x => x.IdWykazu.Equals(id));
+            }
+
+            else throw new Exception("Brak wykazu o podanym Id");
+
         }
 
         public IEnumerable<Wykaz> GetAllWykaz()
@@ -58,26 +69,27 @@ namespace ClassLibrary1
             return _dataContext.Wykazy;
         }
 
-        public void UpdateWykaz(int id, Wykaz element)
+        public void UpdateWykaz(Guid id, Wykaz element)
         {
-            _dataContext.Wykazy.Insert(id, element);
+            int index = _dataContext.Wykazy.FindIndex(wyk => wyk.IdWykazu == id);
+            if (index != -1)
+            {
+                _dataContext.Wykazy.Insert(index, element);
+            }
+            else throw new Exception("Brak Wykazu o podanym Id!");
         }
 
-        public void DeleteWykaz(Wykaz element)
+        public void DeleteWykaz(Wykaz element) // Jak zabezpieczamy przed Wykazem użytym w zdarzeniu? 
         {
-            _dataContext.Wykazy.Remove(element);
+            if (!_dataContext.Wykazy.Remove(element))
+            {
+                throw new Exception("Taki wykaz nie istnieje!");
+            }
+
+
         }
-
-
-
-
-
-
-
-
-
 
     }
-
-
 }
+
+
