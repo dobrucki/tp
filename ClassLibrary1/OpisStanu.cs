@@ -10,17 +10,18 @@ namespace ClassLibrary1
     {
         private Katalog _katalog;
         private int _liczbaSztuk;
-        private DateTime _dataZakupu;
+        private int _rokWydania;
 
-        public OpisStanu(Katalog katalog, int liczbaSztuk, DateTime dataZakupu)
+
+        public OpisStanu(Katalog katalog, int liczbaSztuk, int rokWydania)
         {
             _katalog = katalog;
             _liczbaSztuk = liczbaSztuk;
-            _dataZakupu = dataZakupu;
+            _rokWydania = rokWydania;
         }
 
         public int LiczbaSztuk{ get; set; }
         public Katalog Katalog { get; set; }
-        public DateTime DataZakupu { get; set; }
+        public int RokWydania { get; set; }
     }
 }
