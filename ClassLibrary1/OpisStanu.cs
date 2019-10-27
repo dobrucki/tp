@@ -16,20 +16,17 @@ namespace ClassLibrary1
         }
 
 
-        private readonly Katalog _katalog;
-        private readonly int _rokWydania;
-        private StanPozycji _stan;
+        public Katalog Katalog { get; }
+        public int RokWydania { get; }
+        public StanPozycji Stan { get; set; }
 
 
         public OpisStanu(Katalog katalog, int rokWydania)
         {
-            _katalog = katalog;
-            _rokWydania = rokWydania;
-            _stan = StanPozycji.AVALIABLE;
+            Katalog = katalog;
+            RokWydania = rokWydania;
+            Stan = StanPozycji.AVALIABLE;
         }
-        
-        public Katalog Katalog { get; }
-        public int RokWydania { get; }
-        public StanPozycji Stan { get; set; }
+       
     }
 }

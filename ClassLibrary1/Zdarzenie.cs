@@ -8,19 +8,16 @@ namespace ClassLibrary1
 {
     public abstract class Zdarzenie
     {
-        private Wykaz _wykaz;
-        private OpisStanu _opisStanu;
-        private DateTime _dataZdarzenia;
+        public Wykaz Wykaz { get; }
+        public OpisStanu OpisStanu { get; }
+        public DateTime DataZdarzenia { get; }
 
         public Zdarzenie(Wykaz wykaz, OpisStanu opisStanu, DateTime dataZdarzenia)
         {
-            _wykaz = wykaz;
-            _opisStanu = opisStanu;
-            _dataZdarzenia = dataZdarzenia;
+            Wykaz = wykaz;
+            OpisStanu = opisStanu;
+            DataZdarzenia = dataZdarzenia;
         }
-
-        public Wykaz Wykaz { get; }
-        public OpisStanu OpisStanu { get; }
-        public DateTime DataWypozyczenia { get; }
+        
     }
 }
