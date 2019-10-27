@@ -18,26 +18,27 @@ namespace UnitTests
         }
 
 
-        private DataRepository _repository;
-
-        public DataRepositoryTest()
+        [TestMethod]
+        public void AddKatalog_ValidKatalog_AddsKatalog()
         {
-            _repository = new DataRepository(new TestFiller());
+            DataRepository dataRepository = new DataRepository(new TestFiller());
+            Guid testGuid = Guid.NewGuid();
+            Katalog katalog = new Katalog("Foo", "Jon", "Doe", testGuid);
+            dataRepository.AddKatalog(katalog);
+            Assert.AreEqual(katalog.IdKatalogu, dataRepository.GetKatalog(testGuid).IdKatalogu);
         }
-
 
         [TestMethod]
-        public void AddKatalogTest()
+        public void AddKatalog_ValidKatalog_Throws()
         {
-            string title, firstName, lastName;
-            title = "Foo";
-            firstName = "Jon";
-            lastName = "Doe";
+            DataRepository dataRepository = new DataRepository(new TestFiller());
+            Guid testGuid = Guid.NewGuid();
+            Katalog katalog = new Katalog("Foo", "Jon", "Doe", testGuid);
+            dataRepository.AddKatalog(katalog);
+            Assert.ThrowsException<Exception>(() => dataRepository.AddKatalog(katalog));
 
-            Katalog katalog = new Katalog(title, firstName, lastName);
-            _repository.AddKatalog(katalog);
-
-            Assert.AreEqual(katalog, _repository.GetKatalog(0));
         }
+
+
     }
 }
