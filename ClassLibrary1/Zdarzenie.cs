@@ -6,21 +6,21 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary1
 {
-    public class Zdarzenie
+    public abstract class Zdarzenie
     {
         private Wykaz _wykaz;
         private OpisStanu _opisStanu;
-        private DateTime _dataWypozyczenia;
+        private DateTime _dataZdarzenia;
 
-        public Zdarzenie(Wykaz wykaz, OpisStanu opisStanu, DateTime dataWypozyczenia)
+        public Zdarzenie(Wykaz wykaz, OpisStanu opisStanu, DateTime dataZdarzenia)
         {
             _wykaz = wykaz;
             _opisStanu = opisStanu;
-            _dataWypozyczenia = dataWypozyczenia;
+            _dataZdarzenia = dataZdarzenia;
         }
 
-        public Wykaz Wykaz { get; private set; }
-        public OpisStanu OpisStanu { get; private set; }
-        public DateTime DataWypozyczenia { get; private set; }
+        public Wykaz Wykaz { get; }
+        public OpisStanu OpisStanu { get; }
+        public DateTime DataWypozyczenia { get; }
     }
 }
