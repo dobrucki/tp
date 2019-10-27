@@ -22,7 +22,7 @@ namespace ClassLibrary1
             dataContext.Katalogi.Add(new Guid("842f8c3e-878b-48f9-bc31-d50cd2be22da"), new Katalog("Pani Twardowska", "Adam", "Mickiewicz", new Guid("842f8c3e-878b-48f9-bc31-d50cd2be22da")));
             dataContext.Katalogi.Add(new Guid("c448467b-17ab-450b-8f64-1450022762ed"), new Katalog("Burza", "Henryk", "Sienkiewcz", new Guid("c448467b-17ab-450b-8f64-1450022762ed")));
 
-            dataContext.OpisyStanu.Add(new OpisStanu(dataContext.Katalogi[new Guid("b9b713a2-93ac-4696-96d9-ce1257b8835d")], 10, 1999));
+            /*dataContext.OpisyStanu.Add(new OpisStanu(dataContext.Katalogi[new Guid("b9b713a2-93ac-4696-96d9-ce1257b8835d")], 10, 1999));
             dataContext.OpisyStanu.Add(new OpisStanu(dataContext.Katalogi[new Guid("1df6b044-901b-452c-909e-4acdd52c1ba5")], 15, 2010));
             dataContext.OpisyStanu.Add(new OpisStanu(dataContext.Katalogi[new Guid("ab23a3c2-9dba-4a8a-aacf-daba29cf7000")], 20, 2015));
             dataContext.OpisyStanu.Add(new OpisStanu(dataContext.Katalogi[new Guid("842f8c3e-878b-48f9-bc31-d50cd2be22da")], 0, 1980));
@@ -31,7 +31,7 @@ namespace ClassLibrary1
             for (int i=0; i<5; i++)
             {
                 dataContext.Zdarzenia.Add(new Zdarzenie(dataContext.Wykazy[i], dataContext.OpisyStanu[i], DateTime.Today));
-            }
+            }*/
 
         }
 

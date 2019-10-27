@@ -50,7 +50,9 @@ namespace ClassLibrary1
         {
             if (_dataContext.Katalogi.ContainsKey(id))
             {
+                pozycja.IdKatalogu = id;
                 _dataContext.Katalogi[id] = pozycja;
+                
             }
             else
             {
