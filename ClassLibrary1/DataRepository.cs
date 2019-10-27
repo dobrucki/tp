@@ -48,7 +48,7 @@ namespace ClassLibrary1
             _dataContext.Wykazy.Add(element);
         }
 
-        public Wykaz GetWykaz(String id)
+        public Wykaz GetWykaz(Guid id)
         {
             return _dataContext.Wykazy.Find(x => x.IdWykazu.Equals(id));    
         }

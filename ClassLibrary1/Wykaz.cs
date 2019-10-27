@@ -10,9 +10,9 @@ namespace ClassLibrary1
     {
         private string _firstName;
         private string _lastName;
-        private string _idWykazu;
+        private Guid _idWykazu;
 
-        public Wykaz(string firstName, string lastName, string idWykazu)
+        public Wykaz(string firstName, string lastName, Guid idWykazu)
         {
             _firstName = firstName;
             _lastName = lastName;
@@ -21,7 +21,7 @@ namespace ClassLibrary1
 
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string IdWykazu { get; set; }
+        public Guid IdWykazu { get; set; }
         
     }
 }
