@@ -84,13 +84,12 @@ namespace ClassLibrary1
 
         public Wykaz GetWykaz(Guid id)
         {
-            if (_dataContext.Wykazy.Any(wyk => wyk.IdWykazu == id))
-            {
-                return _dataContext.Wykazy.Find(x => x.IdWykazu.Equals(id));
+            Wykaz wykaz = _dataContext.Wykazy.Find(x => x.IdWykazu.Equals(id));
+            
+            if (wykaz is null) {
+                throw new Exception("Brak wykazu o podanym Id");
             }
-
-            else throw new Exception("Brak wykazu o podanym Id");
-
+            return wykaz;
         }
 
         public IEnumerable<Wykaz> GetAllWykaz()
