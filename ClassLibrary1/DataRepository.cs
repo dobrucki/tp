@@ -137,9 +137,34 @@ namespace ClassLibrary1
         }
 
         //CRUD ZDARZENIE
-        //...
+        public void AddZdarzenie(Zdarzenie zdarzenie)
+        {
+            if(zdarzenie.Validate())
+            {
+                _dataContext.Zdarzenia.Add(zdarzenie);
+            }
+            else
+            {
+                throw new Exception("Niepoprawne zdarzenie!");
+            }
+        }
 
+        public Zdarzenie GetZdarzenie(Guid guid)
+        {
+            foreach(Zdarzenie z in _dataContext.Zdarzenia){
+                if (guid == z.Guid)
+                {
+                    return z;
+                }
+            }
+            throw new Exception("Brak zdarzenia o podanym GUID");
+        }
 
+        public IEnumerable<Zdarzenie> GetAllZdarzenie()
+        {
+            return _dataContext.Zdarzenia;
+        }
+        
     }
 }
 
