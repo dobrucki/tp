@@ -94,9 +94,7 @@ namespace UnitTests
         public void GetAllKWykaz_ReturnsAllWykaz()
         {
             DataRepository dataRepository = new DataRepository(new TestFiller());
-            IEnumerable<Katalog> wykazy = dataRepository.GetAllKatalog();
-            Assert.AreEqual(1, wykazy.Count());
-
+            Assert.AreEqual(1, dataRepository.GetAllWykaz().Count());
         }
 
         [TestMethod]

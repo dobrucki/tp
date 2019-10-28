@@ -100,7 +100,42 @@ namespace ClassLibrary1
         }
 
         //CRUD OPIS STANU
-        // ...
+        public void AddOpisStanu(OpisStanu opis)
+        {
+            if (_dataContext.OpisyStanu.Any(op => op.IdOpisuStanu == opis.IdOpisuStanu))
+            {
+                throw new Exception("Jest już opis stanu o podanym Id");
+            }
+
+            _dataContext.OpisyStanu.Add(opis);
+        }
+        public OpisStanu GetOpisStanu(Guid id)
+        {
+            OpisStanu opisStanu = _dataContext.OpisyStanu.Find(x => x.IdOpisuStanu.Equals(id));
+
+            if (opisStanu is null)
+            {
+                throw new Exception("Brak opisu stanu o podanym Id");
+            }
+            return opisStanu;
+        }
+
+        public IEnumerable<OpisStanu> GetAllOpisStanu()
+        {
+            return _dataContext.OpisyStanu;
+        }
+
+        public void UpdateOpisStanu(Guid id, OpisStanu opisStanu)
+        {
+            int index = _dataContext.OpisyStanu.FindIndex(op => op.IdOpisuStanu == id);
+            if (index != -1)
+            {
+                opisStanu.IdOpisuStanu = id;
+                _dataContext.OpisyStanu[index] = opisStanu;
+            }
+            else throw new Exception("Brak opisu stanu o podanym Id!");
+        }
+
         //CRUD ZDARZENIE
         //...
 
