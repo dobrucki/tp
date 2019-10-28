@@ -19,7 +19,7 @@ namespace ClassLibrary1
         public Katalog Katalog { get; }
         public int RokWydania { get; }
         public StanPozycji Stan { get; set; }
-        public Guid IdOpisuStanu { get; set; }
+        public Guid IdOpisuStanu { get; }
 
 
         public OpisStanu(Katalog katalog, int rokWydania, Guid idOpisuStanu)

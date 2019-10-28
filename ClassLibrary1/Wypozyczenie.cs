@@ -12,9 +12,14 @@ namespace ClassLibrary1
         {
         }
 
-        public override bool Validate(IEnumerable<Zdarzenie> zdarzenia)
+        public override bool Validate(DataRepository dataRepository)
         {
-            throw new NotImplementedException();
+            if(OpisStanu.StanPozycji.AVALIABLE != OpisStanu.Stan)
+            {
+                return false;
+            }
+            OpisStanu.Stan = OpisStanu.StanPozycji.RENTED;
+            return true;
         }
     }
 }
