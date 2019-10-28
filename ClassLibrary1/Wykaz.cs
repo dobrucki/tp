@@ -8,9 +8,9 @@ namespace ClassLibrary1
 {
     public class Wykaz // Czytelnik
     {
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public Guid IdWykazu { get; set; }
+        public string FirstName { get; }
+        public string LastName { get; }
+        public Guid IdWykazu { get; }
 
         public Wykaz(string firstName, string lastName, Guid idWykazu)
         {

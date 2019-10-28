@@ -45,23 +45,7 @@ namespace ClassLibrary1
         {
             return _dataContext.Katalogi.Values;
         }
-
-        public void UpdateKatalog(Guid id, Katalog pozycja)
-        {
-            if (_dataContext.Katalogi.ContainsKey(id))
-            {
-                pozycja.IdKatalogu = id;
-                _dataContext.Katalogi[id] = pozycja;
-                
-            }
-            else
-            {
-                throw new Exception("Brak katalogu o podanym Id!");
-            }
-
-        }
-
-
+        
         //CRUD Wykaz
         public void AddWykaz(Wykaz element)
         {
@@ -86,17 +70,6 @@ namespace ClassLibrary1
         public IEnumerable<Wykaz> GetAllWykaz()
         {
             return _dataContext.Wykazy;
-        }
-
-        public void UpdateWykaz(Guid id, Wykaz element)
-        {
-            int index = _dataContext.Wykazy.FindIndex(wyk => wyk.IdWykazu == id);
-            if (index != -1)
-            {
-                element.IdWykazu = id;
-                _dataContext.Wykazy[index] = element;
-            }
-            else throw new Exception("Brak Wykazu o podanym Id!");
         }
 
         //CRUD OPIS STANU
