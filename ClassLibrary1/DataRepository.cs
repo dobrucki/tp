@@ -61,17 +61,6 @@ namespace ClassLibrary1
 
         }
 
-        public void DeleteKatalog(Guid id) // Jak zabezpieczamy przed Katalogiem który posiada opis stanu? 
-        {
-            if (_dataContext.Katalogi.ContainsKey(id))
-            {
-                _dataContext.Katalogi.Remove(id);
-            }
-            else
-            {
-                throw new Exception("Brak katalogu o podanym Id!");
-            }
-        }
 
         //CRUD Wykaz
         public void AddWykaz(Wykaz element)
@@ -104,19 +93,10 @@ namespace ClassLibrary1
             int index = _dataContext.Wykazy.FindIndex(wyk => wyk.IdWykazu == id);
             if (index != -1)
             {
-                _dataContext.Wykazy.Insert(index, element);
+                element.IdWykazu = id;
+                _dataContext.Wykazy[index] = element;
             }
             else throw new Exception("Brak Wykazu o podanym Id!");
-        }
-
-        public void DeleteWykaz(Wykaz element) // Jak zabezpieczamy przed Wykazem użytym w zdarzeniu? 
-        {
-            if (!_dataContext.Wykazy.Remove(element))
-            {
-                throw new Exception("Taki wykaz nie istnieje!");
-            }
-
-
         }
 
         //CRUD OPIS STANU
