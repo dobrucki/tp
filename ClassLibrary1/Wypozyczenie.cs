@@ -12,7 +12,7 @@ namespace ClassLibrary1
         {
         }
 
-        public override bool Validate(DataRepository dataRepository)
+        public override bool Validate()
         {
             if(OpisStanu.StanPozycji.AVALIABLE != OpisStanu.Stan)
             {

@@ -22,7 +22,7 @@ namespace ClassLibrary1
             Guid = guid;
         }
 
-        public abstract bool Validate(DataRepository dataRepository);
+        public abstract bool Validate();
         
     }
 }
