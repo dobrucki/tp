@@ -125,17 +125,6 @@ namespace ClassLibrary1
             return _dataContext.OpisyStanu;
         }
 
-        public void UpdateOpisStanu(Guid id, OpisStanu opisStanu)
-        {
-            int index = _dataContext.OpisyStanu.FindIndex(op => op.IdOpisuStanu == id);
-            if (index != -1)
-            {
-                opisStanu.IdOpisuStanu = id;
-                _dataContext.OpisyStanu[index] = opisStanu;
-            }
-            else throw new Exception("Brak opisu stanu o podanym Id!");
-        }
-
         //CRUD ZDARZENIE
         public void AddZdarzenie(Zdarzenie zdarzenie)
         {
