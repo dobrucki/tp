@@ -42,6 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataService.cs" />
+    <Compile Include="WypelnianieLosowe.cs" />
+    <Compile Include="WypelnianieStalymi.cs" />
     <Compile Include="Wypozyczenie.cs" />
     <Compile Include="DataContext.cs" />
     <Compile Include="DataRepository.cs" />

@@ -62,12 +62,11 @@ namespace UnitTests
       
 
 
-
         [TestMethod]
         public void GetAllKWykaz_ReturnsAllWykaz()
         {
             DataRepository dataRepository = new DataRepository(new WypelnianieStalymi());
-            Assert.AreEqual(1, dataRepository.GetAllWykaz().Count());
+            Assert.AreEqual(5, dataRepository.GetAllWykaz().Count());
         }
 
         [TestMethod]
