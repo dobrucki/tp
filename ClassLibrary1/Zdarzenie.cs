@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,7 +22,7 @@ namespace ClassLibrary1
             Guid = guid;
         }
 
-        public abstract bool Validate();
+        public abstract bool Validate(IEnumerable<Zdarzenie> zdarzenia);
         
     }
 }

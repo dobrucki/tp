@@ -101,7 +101,7 @@ namespace ClassLibrary1
         //CRUD ZDARZENIE
         public void AddZdarzenie(Zdarzenie zdarzenie)
         {
-            if(zdarzenie.Validate())
+            if(zdarzenie.Validate(GetAllZdarzenie()))
             {
                 _dataContext.Zdarzenia.Add(zdarzenie);
             }
