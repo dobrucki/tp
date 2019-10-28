@@ -8,8 +8,13 @@ namespace ClassLibrary1
 {
     class Wypozyczenie : Zdarzenie
     {
-        public Wypozyczenie(Wykaz wykaz, OpisStanu opisStanu, DateTime dataZdarzenia) : base(wykaz, opisStanu, dataZdarzenia)
+        public Wypozyczenie(Wykaz wykaz, OpisStanu opisStanu, DateTime dataZdarzenia, Guid id) : base(wykaz, opisStanu, dataZdarzenia, id)
         {
+        }
+
+        public override bool Validate(IEnumerable<Zdarzenie> zdarzenia)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -13,7 +13,8 @@ namespace UnitTests
         {
             public void Fill(DataContext ctx)
             {
-                ctx.Wykazy.Add(new Wykaz("Mateusz", "Wasilewski", new Guid("0f8fad5b-d9cb-469f-a165-70867728950e")));
+                Wykaz.Adres ad1 = new Wykaz.Adres("Łódź", "92-525", "Sacharowa", "7");
+                ctx.Wykazy.Add(new Wykaz("Mateusz", "Wasilewski", new Guid("0f8fad5b-d9cb-469f-a165-70867728950e"), ad1));
                 ctx.Katalogi.Add(new Guid("b9b713a2-93ac-4696-96d9-ce1257b8835d"), new Katalog("Quo Vaids", "Henryk", "Sienkiewcz", new Guid("b9b713a2-93ac-4696-96d9-ce1257b8835d")));
             }
         }
@@ -66,27 +67,7 @@ namespace UnitTests
             Assert.ThrowsException<Exception>(() => dataRepository.AddKatalog(testKatalog));
 
         }
-        [TestMethod]
-        public void UpdateKatalog_ExistingKey_Updates()
-        {
-            DataRepository dataRepository = new DataRepository(new TestFiller());
-            Guid testGuid = Guid.NewGuid();
-            Katalog testKatalog = new Katalog("Foo", "Jon", "Doe", testGuid);
-            dataRepository.UpdateKatalog(new Guid("b9b713a2-93ac-4696-96d9-ce1257b8835d"), testKatalog);
-            Assert.AreEqual(dataRepository.GetKatalog(new Guid("b9b713a2-93ac-4696-96d9-ce1257b8835d")), testKatalog);
-            Assert.AreEqual(dataRepository.GetKatalog(new Guid("b9b713a2-93ac-4696-96d9-ce1257b8835d")).IdKatalogu, new Guid("b9b713a2-93ac-4696-96d9-ce1257b8835d"));
-
-
-        }
-        [TestMethod]
-        public void UpdateKatalog_NotExistingKey_Throws()
-        {
-            DataRepository dataRepository = new DataRepository(new TestFiller());
-            Guid testGuid = Guid.NewGuid();
-            Katalog testKatalog = new Katalog("Foo", "Jon", "Doe", testGuid);
-            dataRepository.UpdateKatalog(new Guid("b9b713a2-93ac-4696-96d9-ce1257b8835d"), testKatalog);
-            Assert.ThrowsException<Exception>(() => dataRepository.UpdateKatalog(new Guid("b9b713a2-92ac-4696-96d9-ce1257b8835d"), testKatalog));
-        }
+      
 
 
 
@@ -117,7 +98,8 @@ namespace UnitTests
         {
             DataRepository dataRepository = new DataRepository(new TestFiller());
             Guid testGuid = Guid.NewGuid();
-            Wykaz testWykaz = new Wykaz("Anna", "Kowalska", testGuid);
+            Wykaz.Adres adTest = new Wykaz.Adres("Łódź", "92-445", "Gorkiego", "47");
+            Wykaz testWykaz = new Wykaz("Anna", "Kowalska", testGuid, adTest);
             dataRepository.AddWykaz(testWykaz);
             Assert.AreEqual(testWykaz, dataRepository.GetWykaz(testGuid));
 
@@ -128,33 +110,13 @@ namespace UnitTests
         {
             DataRepository dataRepository = new DataRepository(new TestFiller());
             Guid testGuid = Guid.NewGuid();
-            Wykaz testWykaz = new Wykaz("Anna", "Kowalska", testGuid);
+            Wykaz.Adres adTest = new Wykaz.Adres("Łódź", "92-445", "Gorkiego", "47");
+            Wykaz testWykaz = new Wykaz("Anna", "Kowalska", testGuid, adTest);
             dataRepository.AddWykaz(testWykaz);
             Assert.ThrowsException<Exception>(() => dataRepository.AddWykaz(testWykaz));
 
         }
 
-        [TestMethod]
-        public void UpdateWykaz_ExistingKey_Updates()
-        {
-            DataRepository dataRepository = new DataRepository(new TestFiller());
-            Guid testGuid = Guid.NewGuid();
-            Wykaz testWykaz = new Wykaz("Anna", "Kowalska", testGuid);
-            dataRepository.UpdateWykaz(new Guid("0f8fad5b-d9cb-469f-a165-70867728950e"), testWykaz);
-            Assert.AreEqual(dataRepository.GetWykaz(new Guid("0f8fad5b-d9cb-469f-a165-70867728950e")), testWykaz);
-            Assert.AreEqual(dataRepository.GetWykaz(new Guid("0f8fad5b-d9cb-469f-a165-70867728950e")).IdWykazu, new Guid("0f8fad5b-d9cb-469f-a165-70867728950e"));
-
-        }
-
-        [TestMethod]
-        public void UpdateWykaz_NotExistingKey_Throws()
-        {
-            DataRepository dataRepository = new DataRepository(new TestFiller());
-            Guid testGuid = Guid.NewGuid();
-            Wykaz testWykaz = new Wykaz("Anna", "Kowalska", testGuid);
-            dataRepository.UpdateWykaz(new Guid("0f8fad5b-d9cb-469f-a165-70867728950e"), testWykaz);
-            Assert.ThrowsException<Exception>(() => dataRepository.UpdateWykaz(new Guid("b9b713a2-92ac-4696-96d9-ce1257b8835d"), testWykaz));
-        }
 
 
     }
