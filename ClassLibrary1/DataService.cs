@@ -74,6 +74,23 @@ namespace ClassLibrary1
             return oddaniaDanegoKlienta;
         }
 
+        public bool CzyWypozyczony(OpisStanu opisStanu)
+        {
+            Zdarzenie zdarzenie = _dataRep.GetAllZdarzenie().Last(z => z.OpisStanu == opisStanu);
+            if(zdarzenie is null || typeof(Wypozyczenie) == zdarzenie.GetType())
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public int LiczbaDostepnychOpisowStanu(Katalog katalog)
+        {
+
+
+            return 1;
+        }
+
 
 
 
