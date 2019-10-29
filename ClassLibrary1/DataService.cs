@@ -44,32 +44,12 @@ namespace ClassLibrary1
 
         public IEnumerable<Zdarzenie> WypozyczeniaDlaDanegoWykazu(Wykaz wyk)
         {
-            List<Zdarzenie> wypozyczeniaDanegoWykazu= new List<Zdarzenie>();
-
-            foreach(Zdarzenie zdarzenie in WszystkieZdarzenia())
-            {
-                if(zdarzenie.GetType() == typeof(Wypozyczenie) && zdarzenie.Wykaz.IdWykazu.Equals(wyk.IdWykazu))
-                {
-                    wypozyczeniaDanegoWykazu.Add(zdarzenie);
-                }
-            }
-
-            return wypozyczeniaDanegoWykazu;
+            return _dataRep.GetAllZdarzenie().Where(x => x.Wykaz == wyk).Where(x => x.GetType() == typeof(Wypozyczenie));
         }
 
         public IEnumerable<Zdarzenie> OddaniaDlaDanegoWykazu(Wykaz wyk)
         {
-            List<Zdarzenie> oddaniaDanegoKlienta = new List<Zdarzenie>();
-
-            foreach (Zdarzenie zdarzenie in WszystkieZdarzenia())
-            {
-                if (zdarzenie.GetType() == typeof(Oddanie) && zdarzenie.Wykaz.IdWykazu.Equals(wyk.IdWykazu))
-                {
-                    oddaniaDanegoKlienta.Add(zdarzenie);
-                }
-            }
-
-            return oddaniaDanegoKlienta;
+            return _dataRep.GetAllZdarzenie().Where(x => x.Wykaz == wyk).Where(x => x.GetType() == typeof(Oddanie));
         }
 
         public bool CzyWypozyczony(OpisStanu opisStanu)
@@ -84,9 +64,13 @@ namespace ClassLibrary1
 
         public int LiczbaDostepnychOpisowStanu(Katalog katalog)
         {
-            return _dataRep.GetAllOpisStanu().Where(x => x.Katalog == katalog).Count(x => !CzyWypozyczony(x));
+            return DostepneOpisyStanuDlaKatalogu(katalog).Count();
         }
 
+        public IEnumerable<OpisStanu> DostepneOpisyStanuDlaKatalogu(Katalog katalog)
+        {
+            return _dataRep.GetAllOpisStanu().Where(x => x.Katalog == katalog).Where(x => !CzyWypozyczony(x));
+        }
 
 
 
