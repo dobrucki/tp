@@ -11,15 +11,5 @@ namespace ClassLibrary1
         public Wypozyczenie(Wykaz wykaz, OpisStanu opisStanu, DateTime dataZdarzenia, Guid id) : base(wykaz, opisStanu, dataZdarzenia, id)
         {
         }
-
-        public override bool Validate()
-        {
-            if(OpisStanu.StanPozycji.AVALIABLE != OpisStanu.Stan)
-            {
-                return false;
-            }
-            OpisStanu.Stan = OpisStanu.StanPozycji.RENTED;
-            return true;
-        }
     }
 }

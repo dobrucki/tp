@@ -21,8 +21,5 @@ namespace ClassLibrary1
             DataZdarzenia = dataZdarzenia;
             Guid = guid;
         }
-
-        public abstract bool Validate();
-        
     }
 }

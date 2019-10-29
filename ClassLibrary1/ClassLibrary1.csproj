@@ -41,7 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-	<Compile Include="Oddanie.cs" />
+    <Compile Include="Oddanie.cs" />
     <Compile Include="DataService.cs" />
     <Compile Include="WypelnianieLosowe.cs" />
     <Compile Include="WypelnianieStalymi.cs" />
