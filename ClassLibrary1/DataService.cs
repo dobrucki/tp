@@ -24,8 +24,7 @@ namespace ClassLibrary1
 
         public void Wypozycz(Wykaz w, OpisStanu o)
         {
-            Zdarzenie lastZdarzenie = _dataRep.GetAllZdarzenie().Last(x => x.OpisStanu == o);
-            if(typeof(Wypozyczenie) == lastZdarzenie.GetType())
+            if(CzyWypozyczony(o))
             {
                 throw new Exception("Dany opis stanu nie jest dostepny!");
             }
@@ -35,8 +34,7 @@ namespace ClassLibrary1
 
         public void Oddaj(Wykaz w, OpisStanu o)
         {
-            Zdarzenie lastZdarzenie = _dataRep.GetAllZdarzenie().Last(x => x.OpisStanu == o);
-            if (typeof(Oddanie) == lastZdarzenie.GetType())
+            if (!CzyWypozyczony(o))
             {
                 throw new Exception("Dany opis stanu nie został wypożyczony!");
             }
@@ -86,9 +84,7 @@ namespace ClassLibrary1
 
         public int LiczbaDostepnychOpisowStanu(Katalog katalog)
         {
-
-
-            return 1;
+            return _dataRep.GetAllOpisStanu().Where(x => x.Katalog == katalog).Count(x => !CzyWypozyczony(x));
         }
 
 
