@@ -55,7 +55,7 @@ namespace ClassLibrary1
         public bool CzyWypozyczony(OpisStanu opisStanu)
         {
             Zdarzenie zdarzenie = _dataRep.GetAllZdarzenie().Last(z => z.OpisStanu == opisStanu);
-            if(zdarzenie is null || typeof(Wypozyczenie) == zdarzenie.GetType())
+            if(typeof(Wypozyczenie) == zdarzenie.GetType())
             {
                 return true;
             }
