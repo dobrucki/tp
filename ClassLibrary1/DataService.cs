@@ -24,30 +24,24 @@ namespace ClassLibrary1
 
         public void Wypozycz(Wykaz w, OpisStanu o)
         {
-            Wypozyczenie wyp = new Wypozyczenie(w, o, DateTime.Today, Guid.NewGuid());
-            if(wyp.Validate())
-            {
-                _dataRep.AddZdarzenie(wyp);
-            }
-            else
+            Zdarzenie lastZdarzenie = _dataRep.GetAllZdarzenie().Last(x => x.OpisStanu == o);
+            if(typeof(Wypozyczenie) == lastZdarzenie.GetType())
             {
                 throw new Exception("Dany opis stanu nie jest dostepny!");
             }
-            
+            Wypozyczenie wyp = new Wypozyczenie(w, o, DateTime.Today, Guid.NewGuid());
+            _dataRep.AddZdarzenie(wyp);
         }
 
         public void Oddaj(Wykaz w, OpisStanu o)
         {
+            Zdarzenie lastZdarzenie = _dataRep.GetAllZdarzenie().Last(x => x.OpisStanu == o);
+            if (typeof(Oddanie) == lastZdarzenie.GetType())
+            {
+                throw new Exception("Dany opis stanu nie został wypożyczony!");
+            }
             Oddanie odd = new Oddanie(w, o, DateTime.Today, Guid.NewGuid());
-            if (odd.Validate())
-            {
-                _dataRep.AddZdarzenie(odd);
-            }
-            else
-            {
-                throw new Exception("Nie mozna oddac tego opisu stanu!");
-            }
-
+            _dataRep.AddZdarzenie(odd);
         }
 
         public IEnumerable<Zdarzenie> WypozyczeniaDlaDanegoWykazu(Wykaz wyk)
