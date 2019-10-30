@@ -84,8 +84,29 @@ namespace UnitTests
         public void DeleteKatalog_NoExisintgOpisStanu_Deletes()
         {
             DataRepository dataRepository = new DataRepository(new WypelnianieStalymi());
-
-
+            Guid testGuid = Guid.NewGuid();
+            Katalog testKatalog = new Katalog("Foo", "Jon", "Doe", testGuid);
+            dataRepository.AddKatalog(testKatalog);
+            dataRepository.DeleteKatalog(testKatalog);
+            Assert.AreEqual(5, dataRepository.GetAllKatalog().Count());
+        }
+        [TestMethod]
+        public void DeleteKatalog_NonExisintgKatalog_Throws()
+        {
+            DataRepository dataRepository = new DataRepository(new WypelnianieStalymi());
+            Guid testGuid = Guid.NewGuid();
+            Katalog testKatalog = new Katalog("Foo", "Jon", "Doe", testGuid);
+            Assert.ThrowsException<Exception>(() => dataRepository.DeleteKatalog(testKatalog));
+        }
+        [TestMethod]
+        public void DeleteKatalog_ExisintgOpisStanu_Throws()
+        {
+            DataRepository dataRepository = new DataRepository(new WypelnianieStalymi());
+            Guid testGuid = Guid.NewGuid();
+            Katalog testKatalog = new Katalog("Foo", "Jon", "Doe", testGuid);
+            dataRepository.AddKatalog(testKatalog);
+            dataRepository.AddOpisStanu(new OpisStanu(testKatalog, 1999, Guid.NewGuid()));
+            Assert.ThrowsException<Exception>(() => dataRepository.DeleteKatalog(testKatalog));
         }
         #endregion
 

@@ -16,7 +16,7 @@ namespace ClassLibrary1
             filler.Fill(_dataContext);
         }
 
-        //CRUD Katalog
+        #region CRUDKatalog        
         public void AddKatalog(Katalog pozycja)
         {
             if(_dataContext.Katalogi.ContainsKey(pozycja.IdKatalogu))
@@ -61,9 +61,6 @@ namespace ClassLibrary1
 
         }
 
-
-
-
         public void DeleteKatalog(Katalog pozcyja) // Jak zabezpieczamy przed Katalogiem który posiada opis stanu? 
         {
 
@@ -71,16 +68,17 @@ namespace ClassLibrary1
             {
                 if (!_dataContext.Katalogi.Remove(pozcyja.IdKatalogu))
                 {
-                    throw new ArgumentException("Nie ma takiego katalogu");
+                    throw new Exception("Nie ma takiego katalogu");
                 }
                 
             }
             else
             {
-                throw new ArgumentException("Dany katalog ma opis stanu");
+                throw new Exception("Dany katalog ma opis stanu");
             }
         }
 
+        #endregion
 
         //CRUD Wykaz
         public void AddWykaz(Wykaz element)
