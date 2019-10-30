@@ -36,10 +36,11 @@ namespace ClassLibrary1
             dataContext.OpisyStanu.Add(new OpisStanu(dataContext.Katalogi[new Guid("842f8c3e-878b-48f9-bc31-d50cd2be22da")],1980, new Guid("0600e982-f656-43a0-85ba-c7eec7e5c7eb")));
             dataContext.OpisyStanu.Add(new OpisStanu(dataContext.Katalogi[new Guid("c448467b-17ab-450b-8f64-1450022762ed")],1970, new Guid("0d52260a-30d9-4101-a362-3d393a953d41")));
 
-            /*for (int i=0; i<5; i++)
-            {
-                dataContext.Zdarzenia.Add(new Zdarzenie(dataContext.Wykazy[i], dataContext.OpisyStanu[i], DateTime.Today));
-            }*/
+            dataContext.Zdarzenia.Add(new Wypozyczenie(dataContext.Wykazy[0], dataContext.OpisyStanu[0], DateTime.Today, new Guid("d473a55e-54c7-4617-9f47-090708101f2d")));
+            dataContext.Zdarzenia.Add(new Wypozyczenie(dataContext.Wykazy[1], dataContext.OpisyStanu[1], DateTime.Today, new Guid("929fc65d-1dce-4b34-8f33-277afff5cb7f")));
+            dataContext.Zdarzenia.Add(new Wypozyczenie(dataContext.Wykazy[2], dataContext.OpisyStanu[2], DateTime.Today, new Guid("597f4b79-c573-4c1e-a1b8-9ee7111ab832")));
+            dataContext.Zdarzenia.Add(new Wypozyczenie(dataContext.Wykazy[3], dataContext.OpisyStanu[3], DateTime.Today, new Guid("7825994c-b1a8-461b-a3e4-a2519c078956")));
+            dataContext.Zdarzenia.Add(new Wypozyczenie(dataContext.Wykazy[4], dataContext.OpisyStanu[4], DateTime.Today, new Guid("d174090f-c973-4674-aa06-125190c337b5")));
 
         }
 

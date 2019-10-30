@@ -242,15 +242,12 @@ namespace UnitTests
 
        
         [TestMethod]
-        public void GetKWykaz_ValidWykaz_Throws()
+        public void GetOpisStanu_ValidOpisStanu_Throws()
         {
             DataRepository dataRepository = new DataRepository(new WypelnianieStalymi());
             Assert.ThrowsException<Exception>(() => dataRepository.GetOpisStanu(Guid.NewGuid()));
 
         }
-
-
-
 
         [TestMethod]
         public void AddOpisStanu_ValidOpisStanu_AddsOpisStanu()
@@ -350,6 +347,115 @@ namespace UnitTests
             dataRepository.AddZdarzenie(new Wypozyczenie(testWykaz, testOpis, DateTime.Now, Guid.NewGuid()));
             Assert.ThrowsException<Exception>(() => dataRepository.DeleteOpisStanu(testOpis));
         }
+        #endregion
+
+        #region ZdarzenieTest
+
+        [TestMethod]
+        public void GetAllZdarzenie_ReturnsAllZdarzenie()
+        {
+            DataRepository dataRepository = new DataRepository(new WypelnianieStalymi());
+            Assert.AreEqual(5, dataRepository.GetAllZdarzenie().Count());
+        }
+
+        [TestMethod]
+        public void GetZdarzenie_ValidZdarzenie_ReturnsZdarzenie()
+        {
+            DataRepository dataRepository = new DataRepository(new WypelnianieStalymi());
+            Assert.AreEqual(new Guid("d174090f-c973-4674-aa06-125190c337b5"), dataRepository.GetZdarzenie(new Guid("d174090f-c973-4674-aa06-125190c337b5")).Guid);
+        }
+
+
+        [TestMethod]
+        public void GetZdarzenie_ValidZdarzenie_Throws()
+        {
+            DataRepository dataRepository = new DataRepository(new WypelnianieStalymi());
+            Assert.ThrowsException<Exception>(() => dataRepository.GetZdarzenie(Guid.NewGuid()));
+
+        }
+
+        [TestMethod]
+        public void AddZdarzenie_ValidZdarzenie_AddsZdarzenie()
+        {
+            DataRepository dataRepository = new DataRepository(new WypelnianieStalymi());
+            Guid testGuid = Guid.NewGuid();
+            Guid testGuid1 = Guid.NewGuid();
+            Guid testGuid2 = Guid.NewGuid();
+            Guid testGuid3 = Guid.NewGuid();
+            Katalog testKatalog = new Katalog("Foo", "Jon", "Doe", testGuid);
+            OpisStanu testOpisStanu = new OpisStanu(testKatalog, 2019, testGuid1);
+            Wykaz.Adres adTest = new Wykaz.Adres("Łódź", "92-445", "Gorkiego", "47");
+            Wykaz testWykaz = new Wykaz("Anna", "Kowalska", testGuid2, adTest);
+
+            Zdarzenie zd = new Wypozyczenie(testWykaz, testOpisStanu, DateTime.Today, testGuid3);
+            dataRepository.AddZdarzenie(zd);
+            Assert.AreEqual(zd, dataRepository.GetZdarzenie(testGuid3));
+
+        }
+
+        [TestMethod]
+        public void AddZdarzenie_ValidZdarzenie_Throws()
+        {
+            DataRepository dataRepository = new DataRepository(new WypelnianieStalymi());
+            Guid testGuid = Guid.NewGuid();
+            Guid testGuid1 = Guid.NewGuid();
+            Guid testGuid2 = Guid.NewGuid();
+            Guid testGuid3 = Guid.NewGuid();
+            Katalog testKatalog = new Katalog("Foo", "Jon", "Doe", testGuid);
+            OpisStanu testOpisStanu = new OpisStanu(testKatalog, 2019, testGuid1);
+            Wykaz.Adres adTest = new Wykaz.Adres("Łódź", "92-445", "Gorkiego", "47");
+            Wykaz testWykaz = new Wykaz("Anna", "Kowalska", testGuid2, adTest);
+
+            Zdarzenie zd = new Wypozyczenie(testWykaz, testOpisStanu, DateTime.Today, testGuid3);
+            dataRepository.AddZdarzenie(zd);
+
+            Assert.ThrowsException<Exception>(() => dataRepository.AddZdarzenie(zd));
+        }
+
+
+
+        [TestMethod]
+        public void UpdateZdarzenie_ExistingKey_Updates()
+        {
+            DataRepository dataRepository = new DataRepository(new WypelnianieStalymi());
+            Guid testGuid = Guid.NewGuid();
+            Guid testGuid1 = Guid.NewGuid();
+            Guid testGuid2 = Guid.NewGuid();
+            Guid testGuid3 = Guid.NewGuid();
+            Katalog testKatalog = new Katalog("Foo", "Jon", "Doe", testGuid);
+            OpisStanu testOpisStanu = new OpisStanu(testKatalog, 2019, testGuid1);
+            Wykaz.Adres adTest = new Wykaz.Adres("Łódź", "92-445", "Gorkiego", "47");
+            Wykaz testWykaz = new Wykaz("Anna", "Kowalska", testGuid2, adTest);
+
+            Zdarzenie zd = new Wypozyczenie(testWykaz, testOpisStanu, DateTime.Today, testGuid3);
+
+            dataRepository.UpdateZdarzenie(new Guid("d473a55e-54c7-4617-9f47-090708101f2d"), zd);
+
+            Assert.AreEqual(dataRepository.GetZdarzenie(new Guid("d473a55e-54c7-4617-9f47-090708101f2d")), zd);
+            Assert.AreEqual(dataRepository.GetZdarzenie(new Guid("d473a55e-54c7-4617-9f47-090708101f2d")).Guid, new Guid("d473a55e-54c7-4617-9f47-090708101f2d"));
+        }
+
+        [TestMethod]
+        public void UpdateZdarzenie_NotExistingKey_Throws()
+        {
+            DataRepository dataRepository = new DataRepository(new WypelnianieStalymi());
+            Guid testGuid = Guid.NewGuid();
+            Guid testGuid1 = Guid.NewGuid();
+            Guid testGuid2 = Guid.NewGuid();
+            Guid testGuid3 = Guid.NewGuid();
+            Katalog testKatalog = new Katalog("Foo", "Jon", "Doe", testGuid);
+            OpisStanu testOpisStanu = new OpisStanu(testKatalog, 2019, testGuid1);
+            Wykaz.Adres adTest = new Wykaz.Adres("Łódź", "92-445", "Gorkiego", "47");
+            Wykaz testWykaz = new Wykaz("Anna", "Kowalska", testGuid2, adTest);
+
+            Zdarzenie zd = new Wypozyczenie(testWykaz, testOpisStanu, DateTime.Today, testGuid3);
+            Assert.ThrowsException<Exception>(() => dataRepository.UpdateZdarzenie(new Guid("929a5dd9-4191-4eee-8a32-d8bbc74e36c4"), zd));
+        }
+
+
+
+
+
         #endregion
 
     }
