@@ -7,9 +7,9 @@ namespace ClassLibrary1
 {
     public class DataService
     {
-        private DataRepository _dataRep;
+        private IDataRepository _dataRep;
 
-        public DataService(DataRepository dataRepository)
+        public DataService(IDataRepository dataRepository)
         {
             _dataRep = dataRepository;
         }

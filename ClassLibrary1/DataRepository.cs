@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace ClassLibrary1
 {
-    public class DataRepository
+    public class DataRepository : IDataRepository
     {
         private DataContext _dataContext;
 
@@ -229,11 +229,6 @@ namespace ClassLibrary1
                 _dataContext.Zdarzenia[index] = zdarzenie;
             }
             else throw new Exception("Brak zdarzenia o podanym Id!");
-
-
-
-
-
 
 
         }
