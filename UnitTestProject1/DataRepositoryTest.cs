@@ -225,5 +225,9 @@ namespace UnitTests
 
         #endregion
 
+        #region OpisStanuTests
+
+        #endregion
+
     }
 }

@@ -9,7 +9,7 @@ namespace ClassLibrary1
 {
     public abstract class Zdarzenie
     {
-        public Guid Guid { get; }
+        public Guid Guid { get; set; }
         public Wykaz Wykaz { get; }
         public OpisStanu OpisStanu { get; }
         public DateTime DataZdarzenia { get; }
