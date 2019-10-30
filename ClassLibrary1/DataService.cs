@@ -66,6 +66,7 @@ namespace ClassLibrary1
         }
 
 
+
         public IEnumerable<Wykaz> WszystkieWykazy() => _dataRep.GetAllWykaz();
         public IEnumerable<Zdarzenie> WszystkieZdarzenia() => _dataRep.GetAllZdarzenie();
         public IEnumerable<OpisStanu> WszystkieOpisyStanu() => _dataRep.GetAllOpisStanu();
