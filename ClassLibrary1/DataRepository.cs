@@ -45,7 +45,43 @@ namespace ClassLibrary1
         {
             return _dataContext.Katalogi.Values;
         }
-        
+
+        public void UpdateKatalog(Guid id, Katalog pozycja)
+        {
+            if (_dataContext.Katalogi.ContainsKey(id))
+            {
+                pozycja.IdKatalogu = id;
+                _dataContext.Katalogi[id] = pozycja;
+
+            }
+            else
+            {
+                throw new Exception("Brak katalogu o podanym Id!");
+            }
+
+        }
+
+
+
+
+        public void DeleteKatalog(Katalog pozcyja) // Jak zabezpieczamy przed Katalogiem który posiada opis stanu? 
+        {
+
+            if(GetAllOpisStanu().Where(op => op.Katalog.IdKatalogu == pozcyja.IdKatalogu).Count() ==0)
+            {
+                if (!_dataContext.Katalogi.Remove(pozcyja.IdKatalogu))
+                {
+                    throw new ArgumentException("Nie ma takiego katalogu");
+                }
+                
+            }
+            else
+            {
+                throw new ArgumentException("Dany katalog ma opis stanu");
+            }
+        }
+
+
         //CRUD Wykaz
         public void AddWykaz(Wykaz element)
         {
@@ -71,6 +107,38 @@ namespace ClassLibrary1
         {
             return _dataContext.Wykazy;
         }
+
+        public void UpdateWykaz(Guid id, Wykaz element)
+        {
+            int index = _dataContext.Wykazy.FindIndex(wyk => wyk.IdWykazu == id);
+            if (index != -1)
+            {
+                _dataContext.Wykazy.Insert(index, element);
+            }
+            else throw new Exception("Brak Wykazu o podanym Id!");
+        }
+
+
+
+        public void DeleteWykaz(Wykaz element) // Jak zabezpieczamy przed Wykazem użytym w zdarzeniu? 
+        {
+            if (!_dataContext.Wykazy.Remove(element))
+            {
+                throw new Exception("Taki wykaz nie istnieje!");
+            }
+
+
+        }
+
+
+
+
+
+
+
+
+
+
 
         //CRUD OPIS STANU
         public void AddOpisStanu(OpisStanu opis)
@@ -98,17 +166,22 @@ namespace ClassLibrary1
             return _dataContext.OpisyStanu;
         }
 
+        public void UpdateOpisStanu(Guid id, OpisStanu opisStanu)
+        {
+            int index = _dataContext.OpisyStanu.FindIndex(op => op.IdOpisuStanu == id);
+            if (index != -1)
+            {
+                opisStanu.IdOpisuStanu = id;
+                _dataContext.OpisyStanu[index] = opisStanu;
+            }
+            else throw new Exception("Brak opisu stanu o podanym Id!");
+        }
+
+
         //CRUD ZDARZENIE
         public void AddZdarzenie(Zdarzenie zdarzenie)
         {
-            if(zdarzenie.Validate(this))
-            {
                 _dataContext.Zdarzenia.Add(zdarzenie);
-            }
-            else
-            {
-                throw new Exception("Niepoprawne zdarzenie!");
-            }
         }
 
         public Zdarzenie GetZdarzenie(Guid guid)

@@ -15,13 +15,6 @@ namespace ClassLibrary1
             _dataRep = dataRepository;
         }
 
-
-        public IEnumerable<Wykaz> WszystkieWykazy() =>  _dataRep.GetAllWykaz();
-        public IEnumerable<Zdarzenie> WszystkieZdarzenia() => _dataRep.GetAllZdarzenie();
-        public IEnumerable<OpisStanu> WszystkieOpisyStanu() => _dataRep.GetAllOpisStanu();
-        public IEnumerable<Katalog> WszystkieKatalogi() => _dataRep.GetAllKatalog();
-
-
         public void Wypozycz(Wykaz w, OpisStanu o)
         {
             if(CzyWypozyczony(o))
@@ -73,12 +66,14 @@ namespace ClassLibrary1
         }
 
 
+        public IEnumerable<Wykaz> WszystkieWykazy() => _dataRep.GetAllWykaz();
+        public IEnumerable<Zdarzenie> WszystkieZdarzenia() => _dataRep.GetAllZdarzenie();
+        public IEnumerable<OpisStanu> WszystkieOpisyStanu() => _dataRep.GetAllOpisStanu();
+        public IEnumerable<Katalog> WszystkieKatalogi() => _dataRep.GetAllKatalog();
 
-
-
-
-
-
+        public void DodajWykaz(Wykaz wykaz) => _dataRep.AddWykaz(wykaz);
+        public void DodajKatalog(Katalog katalog) => _dataRep.AddKatalog(katalog);
+        public void DodajOpisStanu(OpisStanu opis) => _dataRep.AddOpisStanu(opis);
 
 
 
