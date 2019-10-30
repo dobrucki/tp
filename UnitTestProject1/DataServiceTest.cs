@@ -71,7 +71,7 @@ namespace UnitTests
             DataRepository dataRepository = new DataRepository(new WypelnianieStalymi());
             DataService dataService = new DataService(dataRepository);
             Assert.AreEqual(0, dataService.LiczbaDostepnychOpisowStanu(katalog));
-            OpisStanu opisStanu = new OpisStanu(katalog, 2000, new Guid());
+            OpisStanu opisStanu = new OpisStanu(katalog, 2000, Guid.NewGuid());
             dataService.DodajOpisStanu(opisStanu);
             Assert.AreEqual(1, dataService.LiczbaDostepnychOpisowStanu(katalog));
         }
@@ -81,8 +81,8 @@ namespace UnitTests
         {
             DataRepository dataRepository = new DataRepository(new WypelnianieStalymi());
             DataService dataService = new DataService(dataRepository);
-            Katalog katalog = new Katalog("xd", "xd", "xd", new Guid());
-            OpisStanu opisStanu = new OpisStanu(katalog, 1111, new Guid());
+            Katalog katalog = new Katalog("xd", "xd", "xd", Guid.NewGuid());
+            OpisStanu opisStanu = new OpisStanu(katalog, 1111, Guid.NewGuid());
             dataService.DodajKatalog(katalog);
             dataService.DodajOpisStanu(opisStanu);
 
