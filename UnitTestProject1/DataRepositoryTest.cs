@@ -136,18 +136,7 @@ namespace UnitTests
         }
 
 
-        [TestMethod]
-        public void UpdateWykaz_ExistingKey_Updates()
-        {
-            DataRepository dataRepository = new DataRepository(new WypelnianieStalymi());
-            Guid testGuid = Guid.NewGuid();
-            Wykaz.Adres adTest = new Wykaz.Adres("Łódź", "92-445", "Gorkiego", "47");
-            Wykaz testWykaz = new Wykaz("Anna", "Kowalska", testGuid, adTest);
-            dataRepository.UpdateWykaz(new Guid("0f8fad5b-d9cb-469f-a165-70867728950e"), testWykaz);
-            Assert.AreEqual(dataRepository.GetWykaz(new Guid("0f8fad5b-d9cb-469f-a165-70867728950e")), testWykaz);
-            Assert.AreEqual(dataRepository.GetWykaz(new Guid("0f8fad5b-d9cb-469f-a165-70867728950e")).IdWykazu, new Guid("0f8fad5b-d9cb-469f-a165-70867728950e"));
-
-        }
+        
 
         [TestMethod]
         public void UpdateWykaz_NotExistingKey_Throws()
