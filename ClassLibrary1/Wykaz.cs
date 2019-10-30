@@ -24,7 +24,7 @@ namespace ClassLibrary1
             }
         }
 
-        public Guid IdWykazu { get; }
+        public Guid IdWykazu { get; set; }
         public string FirstName { get; }
         public string LastName { get; }
         public Adres AdresWykazu { get; set; }

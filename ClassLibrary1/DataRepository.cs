@@ -16,7 +16,7 @@ namespace ClassLibrary1
             filler.Fill(_dataContext);
         }
 
-        //CRUD Katalog
+        #region CRUDKatalog        
         public void AddKatalog(Katalog pozycja)
         {
             if(_dataContext.Katalogi.ContainsKey(pozycja.IdKatalogu))
@@ -61,28 +61,26 @@ namespace ClassLibrary1
 
         }
 
-
-
-
-        public void DeleteKatalog(Katalog pozcyja) // Jak zabezpieczamy przed Katalogiem który posiada opis stanu? 
+        public void DeleteKatalog(Katalog pozcyja)  
         {
 
             if(GetAllOpisStanu().Where(op => op.Katalog.IdKatalogu == pozcyja.IdKatalogu).Count() ==0)
             {
                 if (!_dataContext.Katalogi.Remove(pozcyja.IdKatalogu))
                 {
-                    throw new ArgumentException("Nie ma takiego katalogu");
+                    throw new Exception("Nie ma takiego katalogu");
                 }
                 
             }
             else
             {
-                throw new ArgumentException("Dany katalog ma opis stanu");
+                throw new Exception("Dany katalog ma opis stanu");
             }
         }
 
+        #endregion
 
-        //CRUD Wykaz
+        #region CRUDWykaz
         public void AddWykaz(Wykaz element)
         {
             if (_dataContext.Wykazy.Any(wyk => wyk.IdWykazu == element.IdWykazu))
@@ -113,34 +111,32 @@ namespace ClassLibrary1
             int index = _dataContext.Wykazy.FindIndex(wyk => wyk.IdWykazu == id);
             if (index != -1)
             {
-                _dataContext.Wykazy.Insert(index, element);
+                element.IdWykazu = id;
+                _dataContext.Wykazy[index] = element;
             }
             else throw new Exception("Brak Wykazu o podanym Id!");
         }
 
-
-
-        public void DeleteWykaz(Wykaz element) // Jak zabezpieczamy przed Wykazem użytym w zdarzeniu? 
+        public void DeleteWykaz(Wykaz element) 
         {
-            if (!_dataContext.Wykazy.Remove(element))
+
+            if (GetAllZdarzenie().Where(zd => zd.Wykaz.IdWykazu == element.IdWykazu).Count() == 0)
             {
-                throw new Exception("Taki wykaz nie istnieje!");
+                if (!_dataContext.Wykazy.Remove(element))
+                {
+                    throw new Exception("Nie ma takiego wykazu");
+                }
+
+            }
+            else
+            {
+                throw new Exception("Dany wykaz uczestniczyl juz w wydarzeniu");
             }
 
-
         }
+        #endregion
 
-
-
-
-
-
-
-
-
-
-
-        //CRUD OPIS STANU
+        #region CRUDOpisStanu
         public void AddOpisStanu(OpisStanu opis)
         {
             if (_dataContext.OpisyStanu.Any(op => op.IdOpisuStanu == opis.IdOpisuStanu))
@@ -176,30 +172,78 @@ namespace ClassLibrary1
             }
             else throw new Exception("Brak opisu stanu o podanym Id!");
         }
+        public void DeleteOpisStanu(OpisStanu opis)
+        {
 
+            if (GetAllZdarzenie().Where(zd => zd.OpisStanu.IdOpisuStanu == opis.IdOpisuStanu).Count() == 0)
+            {
+                if (!_dataContext.OpisyStanu.Remove(opis))
+                {
+                    throw new Exception("Nie ma takiego opisu stanu");
+                }
 
-        //CRUD ZDARZENIE
+            }
+            else
+            {
+                throw new Exception("Dany opis stanu uczestniczyl juz w wydarzeniu");
+            }
+            #endregion
+        }
+
+        #region CRUDZdarzenie
         public void AddZdarzenie(Zdarzenie zdarzenie)
         {
-                _dataContext.Zdarzenia.Add(zdarzenie);
+            if (_dataContext.Zdarzenia.Any(zd => zd.Guid == zdarzenie.Guid))
+            {
+                throw new Exception("Jest już zdarzenie o podanym Id");
+            }
+          
+            _dataContext.Zdarzenia.Add(zdarzenie);
         }
 
         public Zdarzenie GetZdarzenie(Guid guid)
         {
-            foreach(Zdarzenie z in _dataContext.Zdarzenia){
-                if (guid == z.Guid)
-                {
-                    return z;
-                }
-            }
-            throw new Exception("Brak zdarzenia o podanym GUID");
+             foreach(Zdarzenie z in _dataContext.Zdarzenia){
+                  if (guid == z.Guid)
+                  {
+                      return z;
+                  }
+              }
+              throw new Exception("Brak zdarzenia o podanym GUID");
+
+     
+
         }
 
         public IEnumerable<Zdarzenie> GetAllZdarzenie()
         {
             return _dataContext.Zdarzenia;
         }
-        
+
+        public void UpdateZdarzenie(Guid guid, Zdarzenie zdarzenie)
+        {
+            Zdarzenie zdarzenia = _dataContext.Zdarzenia.FirstOrDefault(zd => zd.Guid == guid);
+            if (zdarzenia == null)
+            {
+                throw new Exception("Brak zdarzenia o podanym Id!");
+            }
+            int index = _dataContext.Zdarzenia.IndexOf(zdarzenia);
+            zdarzenia.Guid = guid;
+            _dataContext.Zdarzenia[index] = zdarzenie;
+
+        }
+
+
+        public void DeleteZdarzenie(Zdarzenie zdarzenie)
+        {
+
+            if (!_dataContext.Zdarzenia.Remove(zdarzenie))
+            {
+                throw new Exception("Zdarzenie nie istnieje!");
+            }
+        }
+
+        #endregion
     }
 }
 
