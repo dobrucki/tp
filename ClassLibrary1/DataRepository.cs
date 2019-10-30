@@ -61,7 +61,7 @@ namespace ClassLibrary1
 
         }
 
-        public void DeleteKatalog(Katalog pozcyja) // Jak zabezpieczamy przed Katalogiem który posiada opis stanu? 
+        public void DeleteKatalog(Katalog pozcyja)  
         {
 
             if(GetAllOpisStanu().Where(op => op.Katalog.IdKatalogu == pozcyja.IdKatalogu).Count() ==0)
@@ -80,7 +80,7 @@ namespace ClassLibrary1
 
         #endregion
 
-        //CRUD Wykaz
+        #region CRUDWykaz
         public void AddWykaz(Wykaz element)
         {
             if (_dataContext.Wykazy.Any(wyk => wyk.IdWykazu == element.IdWykazu))
@@ -111,24 +111,30 @@ namespace ClassLibrary1
             int index = _dataContext.Wykazy.FindIndex(wyk => wyk.IdWykazu == id);
             if (index != -1)
             {
-                _dataContext.Wykazy.Insert(index, element);
+                element.IdWykazu = id;
+                _dataContext.Wykazy[index] = element;
             }
             else throw new Exception("Brak Wykazu o podanym Id!");
         }
 
-
-
-        public void DeleteWykaz(Wykaz element) // Jak zabezpieczamy przed Wykazem użytym w zdarzeniu? 
+        public void DeleteWykaz(Wykaz element) 
         {
-            if (!_dataContext.Wykazy.Remove(element))
+
+            if (GetAllZdarzenie().Where(zd => zd.Wykaz.IdWykazu == element.IdWykazu).Count() == 0)
             {
-                throw new Exception("Taki wykaz nie istnieje!");
+                if (!_dataContext.Wykazy.Remove(element))
+                {
+                    throw new Exception("Nie ma takiego wykazu");
+                }
+
+            }
+            else
+            {
+                throw new Exception("Dany wykaz uczestniczyl juz w wydarzeniu");
             }
 
-
         }
-
-
+        #endregion
 
 
 

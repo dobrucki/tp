@@ -110,7 +110,7 @@ namespace UnitTests
         }
         #endregion
 
-
+        #region WykazTests
         [TestMethod]
         public void GetAllKWykaz_ReturnsAllWykaz()
         {
@@ -180,6 +180,8 @@ namespace UnitTests
             dataRepository.UpdateWykaz(new Guid("0f8fad5b-d9cb-469f-a165-70867728950e"), testWykaz);
             Assert.ThrowsException<Exception>(() => dataRepository.UpdateWykaz(new Guid("b9b713a2-92ac-4696-96d9-ce1257b8835d"), testWykaz));
         }
+
+        #endregion
 
     }
 }
