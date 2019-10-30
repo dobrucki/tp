@@ -338,7 +338,7 @@ namespace UnitTests
         }
         #endregion
 
-        #region ZdarzenieTest
+        #region ZdarzenieTests
 
         [TestMethod]
         public void GetAllZdarzenie_ReturnsAllZdarzenie()
@@ -418,10 +418,10 @@ namespace UnitTests
 
             Zdarzenie zd = new Wypozyczenie(testWykaz, testOpisStanu, DateTime.Today, testGuid3);
 
-            dataRepository.UpdateZdarzenie(new Guid("d473a55e-54c7-4617-9f47-090708101f2d"), zd);
+            dataRepository.UpdateZdarzenie(new Guid("7825994c-b1a8-461b-a3e4-a2519c078956"), zd);
 
-            Assert.AreEqual(dataRepository.GetZdarzenie(new Guid("d473a55e-54c7-4617-9f47-090708101f2d")), zd);
-            Assert.AreEqual(dataRepository.GetZdarzenie(new Guid("d473a55e-54c7-4617-9f47-090708101f2d")).Guid, new Guid("d473a55e-54c7-4617-9f47-090708101f2d"));
+            Assert.AreEqual(dataRepository.GetZdarzenie(new Guid("7825994c-b1a8-461b-a3e4-a2519c078956")), zd);
+            Assert.AreEqual(dataRepository.GetZdarzenie(new Guid("7825994c-b1a8-461b-a3e4-a2519c078956")).Guid, new Guid("7825994c-b1a8-461b-a3e4-a2519c078956"));
         }
 
         [TestMethod]
@@ -438,12 +438,45 @@ namespace UnitTests
             Wykaz testWykaz = new Wykaz("Anna", "Kowalska", testGuid2, adTest);
 
             Zdarzenie zd = new Wypozyczenie(testWykaz, testOpisStanu, DateTime.Today, testGuid3);
-            Assert.ThrowsException<Exception>(() => dataRepository.UpdateZdarzenie(new Guid("929a5dd9-4191-4eee-8a32-d8bbc74e36c4"), zd));
+            Assert.ThrowsException<Exception>(() => dataRepository.UpdateZdarzenie(new Guid("929a53d9-4191-4eee-8a32-d8bbc74e36c4"), zd));
         }
 
+        [TestMethod]
+        public void DeleteZdarzenie_Deletes()
+        {
+            DataRepository dataRepository = new DataRepository(new WypelnianieStalymi());
+            Guid testGuid = Guid.NewGuid();
+            Guid testGuid1 = Guid.NewGuid();
+            Guid testGuid2 = Guid.NewGuid();
+            Guid testGuid3 = Guid.NewGuid();
+            Katalog testKatalog = new Katalog("Foo", "Jon", "Doe", testGuid);
+            OpisStanu testOpisStanu = new OpisStanu(testKatalog, 2019, testGuid1);
+            Wykaz.Adres adTest = new Wykaz.Adres("Łódź", "92-445", "Gorkiego", "47");
+            Wykaz testWykaz = new Wykaz("Anna", "Kowalska", testGuid2, adTest);
 
+            Zdarzenie zd = new Wypozyczenie(testWykaz, testOpisStanu, DateTime.Today, testGuid3);
+            dataRepository.AddZdarzenie(zd);
+            dataRepository.DeleteZdarzenie(zd);
+            Assert.AreEqual(5, dataRepository.GetAllZdarzenie().Count());
+        }
 
+        [TestMethod]
+        public void DeleteZdarzenie_NonExistingZdarzenie_Throws()
+        {
+            DataRepository dataRepository = new DataRepository(new WypelnianieStalymi());
+            Guid testGuid = Guid.NewGuid();
+            Guid testGuid1 = Guid.NewGuid();
+            Guid testGuid2 = Guid.NewGuid();
+            Guid testGuid3 = Guid.NewGuid();
+            Katalog testKatalog = new Katalog("Foo", "Jon", "Doe", testGuid);
+            OpisStanu testOpisStanu = new OpisStanu(testKatalog, 2019, testGuid1);
+            Wykaz.Adres adTest = new Wykaz.Adres("Łódź", "92-445", "Gorkiego", "47");
+            Wykaz testWykaz = new Wykaz("Anna", "Kowalska", testGuid2, adTest);
 
+            Zdarzenie zd = new Wypozyczenie(testWykaz, testOpisStanu, DateTime.Today, testGuid3);
+
+            Assert.ThrowsException<Exception>(() => dataRepository.DeleteZdarzenie(zd));
+        }
 
         #endregion
 

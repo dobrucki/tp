@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ClassLibrary1
 {
-    public class DataRepository
+    public class DataRepository : IDataRepository
     {
         private DataContext _dataContext;
 
@@ -222,14 +220,16 @@ namespace ClassLibrary1
 
         public void UpdateZdarzenie(Guid guid, Zdarzenie zdarzenie)
         {
-            Zdarzenie zdarzenia = _dataContext.Zdarzenia.FirstOrDefault(zd => zd.Guid == guid);
-            if (zdarzenia == null)
+            List<Zdarzenie> zdList= new List<Zdarzenie>(_dataContext.Zdarzenia);
+
+            int index = zdList.FindIndex(zd => zd.Guid == guid);
+            if (index != -1)
             {
-                throw new Exception("Brak zdarzenia o podanym Id!");
+                zdarzenie.Guid= guid;
+                _dataContext.Zdarzenia[index] = zdarzenie;
             }
-            int index = _dataContext.Zdarzenia.IndexOf(zdarzenia);
-            zdarzenia.Guid = guid;
-            _dataContext.Zdarzenia[index] = zdarzenie;
+            else throw new Exception("Brak zdarzenia o podanym Id!");
+
 
         }
 
