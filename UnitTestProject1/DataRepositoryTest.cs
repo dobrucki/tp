@@ -181,6 +181,48 @@ namespace UnitTests
             Assert.ThrowsException<Exception>(() => dataRepository.UpdateWykaz(new Guid("b9b713a2-92ac-4696-96d9-ce1257b8835d"), testWykaz));
         }
 
+
+        [TestMethod]
+        public void DeleteWykaz_NotExistingZdarzenie_Deletes()
+        {
+            DataRepository dataRepository = new DataRepository(new WypelnianieStalymi());
+            Guid testGuid = Guid.NewGuid();
+            Wykaz.Adres adTest = new Wykaz.Adres("Łódź", "92-445", "Gorkiego", "47");
+            Wykaz testWykaz = new Wykaz("Anna", "Kowalska", testGuid, adTest);
+            dataRepository.AddWykaz(testWykaz);
+            dataRepository.DeleteWykaz(testWykaz);
+            Assert.AreEqual(5, dataRepository.GetAllKatalog().Count());
+        }
+
+        [TestMethod]
+        public void DeleteWykaz_NonExisintgWykaz_Throws()
+        {
+            DataRepository dataRepository = new DataRepository(new WypelnianieStalymi());
+            Guid testGuid = Guid.NewGuid();
+            Wykaz.Adres adTest = new Wykaz.Adres("Łódź", "92-445", "Gorkiego", "47");
+            Wykaz testWykaz = new Wykaz("Anna", "Kowalska", testGuid, adTest);
+            Assert.ThrowsException<Exception>(() => dataRepository.DeleteWykaz(testWykaz));
+        }
+        [TestMethod]
+        public void DeleteWykaz_ExisintgZdarzenie_Throws()
+        {
+            DataRepository dataRepository = new DataRepository(new WypelnianieStalymi());
+            Guid testGuid = Guid.NewGuid();
+            Katalog testKatalog = new Katalog("Foo", "Jon", "Doe", testGuid);
+            
+            Guid testGuid1 = Guid.NewGuid();
+            Wykaz.Adres adTest = new Wykaz.Adres("Łódź", "92-445", "Gorkiego", "47");
+            Wykaz testWykaz = new Wykaz("Anna", "Kowalska", testGuid1, adTest);
+
+            OpisStanu testOpis = new OpisStanu(testKatalog, 1999, Guid.NewGuid());
+            
+            dataRepository.AddWykaz(testWykaz);
+            dataRepository.AddKatalog(testKatalog);
+            dataRepository.AddOpisStanu(testOpis);
+            dataRepository.AddZdarzenie(new Wypozyczenie(testWykaz, testOpis,DateTime.Now, Guid.NewGuid()));
+            Assert.ThrowsException<Exception>(() => dataRepository.DeleteWykaz(testWykaz));
+        }
+
         #endregion
 
     }
