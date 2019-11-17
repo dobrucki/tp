@@ -1,5 +1,6 @@
 ﻿using System;
-
+using System.Runtime.Serialization;
+using System.Text;
 
 namespace ClassLibrary1
 {
@@ -19,6 +20,16 @@ namespace ClassLibrary1
                 Ulica = ulica;
                 Numer = numer;
             }
+            public string Serialize(ObjectIDGenerator idGenerator)
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.Append(Miasto + ", ");
+                sb.Append(KodPocztowy + ", ");
+                sb.Append(Ulica + ", ");
+                sb.Append(Numer + ", ");
+                sb.Append(idGenerator.GetId(this, out bool firstTime) + ", ");
+                return sb.ToString();
+            }
         }
 
         public Guid IdWykazu { get; set; }
@@ -32,6 +43,20 @@ namespace ClassLibrary1
             LastName = lastName;
             IdWykazu = idWykazu;
             AdresWykazu = adres;
+        }
+
+
+        public string Serialize(ObjectIDGenerator idGenerator)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append(FirstName + ", ");
+            sb.Append(LastName + ", ");
+            sb.Append(IdWykazu + ", ");
+            sb.Append(idGenerator.GetId(this, out bool firstTime) + ", ");
+            sb.Append(AdresWykazu.Serialize (idGenerator));
+            return sb.ToString();
+
+ 
         }
         
     }
