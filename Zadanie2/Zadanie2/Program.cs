@@ -1,9 +1,7 @@
 ﻿using ClassLibrary1;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
+
 
 
 namespace Zadanie2
@@ -14,7 +12,6 @@ namespace Zadanie2
         {
 
             DataContext dataContext= new DataContext();
-           
 
             Wykaz.Adres ad1 = new Wykaz.Adres("Łódź", "92-525", "Sacharowa", "7");
             Wykaz.Adres ad2 = new Wykaz.Adres("Zelów", "99-525", "Piotrkowska", "77");
@@ -46,7 +43,20 @@ namespace Zadanie2
             dataContext.Zdarzenia.Add(new Wypozyczenie(dataContext.Wykazy[3], dataContext.OpisyStanu[3], DateTime.Today, new Guid("7825994c-b1a8-461b-a3e4-a2519c078956")));
             dataContext.Zdarzenia.Add(new Wypozyczenie(dataContext.Wykazy[4], dataContext.OpisyStanu[4], DateTime.Today, new Guid("d174090f-c973-4674-aa06-125190c337b5")));
 
-            Serializer.Serialize(dataContext, "test.dat");
+            string path = "test.dat";
+
+            if (File.Exists(path))
+            {
+                File.Delete(path);
+            }
+
+            Stream serializationStream = File.Open(path, FileMode.Create, FileAccess.ReadWrite);
+
+            MyFormatter formatter= new MyFormatter();
+            formatter.Serialize(serializationStream, dataContext);
+            serializationStream.Close();
+
+
         }
 
     }

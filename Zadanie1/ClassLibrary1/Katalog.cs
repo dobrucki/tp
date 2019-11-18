@@ -1,5 +1,6 @@
 ﻿using System;
-
+using System.Runtime.Serialization;
+using System.Text;
 
 namespace ClassLibrary1
 {
@@ -17,7 +18,18 @@ namespace ClassLibrary1
             NazwiskoAutora = nazwiskoAutora;
             IdKatalogu = idKatalogu;
         }
-        
+
+        public string Serialize(ObjectIDGenerator idGenerator)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append(Tytul + ", ");
+            sb.Append(ImieAutora + ", ");
+            sb.Append(NazwiskoAutora + ", ");
+            sb.Append(IdKatalogu + ", ");
+            sb.Append(idGenerator.GetId(this, out bool firstTime) + ", ");
+            return sb.ToString();
+        }
+
 
     }
 

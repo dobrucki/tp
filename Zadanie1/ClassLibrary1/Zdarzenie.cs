@@ -1,5 +1,6 @@
 ﻿using System;
-
+using System.Runtime.Serialization;
+using System.Text;
 
 namespace ClassLibrary1
 {
@@ -16,6 +17,16 @@ namespace ClassLibrary1
             OpisStanu = opisStanu;
             DataZdarzenia = dataZdarzenia;
             Guid = guid;
+        }
+        public string Serialize(ObjectIDGenerator idGenerator)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append(Wykaz + ", ");
+            sb.Append(OpisStanu + ", ");
+            sb.Append(DataZdarzenia + ", ");
+            sb.Append(Guid + ", ");
+            sb.Append(idGenerator.GetId(this, out bool firstTime) + ", ");
+            return sb.ToString();
         }
     }
 }
