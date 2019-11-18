@@ -23,10 +23,10 @@ namespace ClassLibrary1
         public string Serialize(ObjectIDGenerator idGenerator)
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append(Katalog + ", ");
+            sb.Append(idGenerator.GetId(Katalog, out bool firstTime) + ", ");
             sb.Append(RokWydania + ", ");
             sb.Append(IdOpisuStanu + ", ");
-            sb.Append(idGenerator.GetId(this, out bool firstTime) + ", ");
+            sb.Append(idGenerator.GetId(this, out firstTime) + ", ");
             return sb.ToString();
         }
 

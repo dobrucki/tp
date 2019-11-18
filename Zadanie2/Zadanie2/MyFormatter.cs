@@ -11,9 +11,23 @@ namespace Zadanie2
 {
     class MyFormatter
     {
-        public object Deserialize(Stream serializationStream)
+        public DataContext Deserialize(Stream serializationStream)
         {
-            throw new NotImplementedException();
+
+            StreamReader reader = new StreamReader(serializationStream, Encoding.GetEncoding(1250));
+
+            DataContext dataContext = new DataContext();
+
+
+            string line;
+
+            while ((line = reader.ReadLine()) != null)
+            {
+                List<string> splitedLine = line.Split(',').ToList();
+
+            }
+
+            return dataContext;
         }
 
 

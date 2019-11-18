@@ -49,11 +49,12 @@ namespace ClassLibrary1
         public string Serialize(ObjectIDGenerator idGenerator)
         {
             StringBuilder sb = new StringBuilder();
+            sb.Append(AdresWykazu.Serialize(idGenerator));
             sb.Append(FirstName + ", ");
             sb.Append(LastName + ", ");
             sb.Append(IdWykazu + ", ");
             sb.Append(idGenerator.GetId(this, out bool firstTime) + ", ");
-            sb.Append(AdresWykazu.Serialize (idGenerator));
+            sb.Append(idGenerator.GetId(AdresWykazu, out firstTime) + ", ");
             return sb.ToString();
 
  

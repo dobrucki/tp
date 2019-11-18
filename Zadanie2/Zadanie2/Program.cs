@@ -45,15 +45,13 @@ namespace Zadanie2
 
             string path = "test.dat";
 
-            if (File.Exists(path))
-            {
-                File.Delete(path);
-            }
 
-            Stream serializationStream = File.Open(path, FileMode.Create, FileAccess.ReadWrite);
-
-            MyFormatter formatter= new MyFormatter();
+            Stream serializationStream = File.Open(path, FileMode.Create, FileAccess.Write);
+            //Stream deserializationStream = File.Open(path, FileMode.Open, FileAccess.Read);
+            //formatter.Deserialize(deserializationStream);
+            MyFormatter formatter = new MyFormatter();
             formatter.Serialize(serializationStream, dataContext);
+
             serializationStream.Close();
 
 

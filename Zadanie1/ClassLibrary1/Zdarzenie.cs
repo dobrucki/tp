@@ -21,11 +21,11 @@ namespace ClassLibrary1
         public string Serialize(ObjectIDGenerator idGenerator)
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append(Wykaz + ", ");
-            sb.Append(OpisStanu + ", ");
+            sb.Append(idGenerator.GetId(Wykaz, out bool firstTime) + ", ");
+            sb.Append(idGenerator.GetId(OpisStanu, out  firstTime) + ", ");
             sb.Append(DataZdarzenia + ", ");
             sb.Append(Guid + ", ");
-            sb.Append(idGenerator.GetId(this, out bool firstTime) + ", ");
+            sb.Append(idGenerator.GetId(this, out firstTime) + ", ");
             return sb.ToString();
         }
     }
