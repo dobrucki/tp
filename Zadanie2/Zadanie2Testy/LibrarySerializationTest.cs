@@ -87,9 +87,26 @@ namespace Zadanie2Testy
             Assert.AreEqual(opis2, deserialized[1]);
         }
 
+        [TestMethod]
         public void ReccursionTest()
         {
+            A a = new A();
+            B b = new B();
+            C c = new C();
+            a.Name = "Object A";
+            a.GetC = c;
+            b.Name = "Object B";
+            b.GetA = a;
+            c.Name = "Object C";
+            c.GetB = b;
 
+            string json = JsonConvert.SerializeObject(a, Formatting.Indented, new JsonSerializerSettings { PreserveReferencesHandling = PreserveReferencesHandling.Objects });
+            File.WriteAllText("data_r.json", json);
+
+            string readJson = File.ReadAllText("data_r.json");
+            A deserialized = JsonConvert.DeserializeObject<A>(readJson, new JsonSerializerSettings { PreserveReferencesHandling = PreserveReferencesHandling.Objects });
+
+            Assert.AreEqual(a, deserialized);
         }
     }
 }
