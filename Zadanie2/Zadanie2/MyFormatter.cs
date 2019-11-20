@@ -1,11 +1,10 @@
-﻿using System;
+﻿
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Runtime.Serialization;
 using System.IO;
 using ClassLibrary1;
-using System.Reflection;
 
 namespace Zadanie2
 {
@@ -52,7 +51,6 @@ namespace Zadanie2
 
             DataContext deserializedDataContext = new DataContext();
             string line;
-            Assembly asm = typeof(Wykaz).Assembly;
 
             Dictionary<string, Wykaz.Adres> idAdresPair = new Dictionary<string, Wykaz.Adres>();
             Dictionary<string, Wykaz> idWykazPair = new Dictionary<string, Wykaz>();

@@ -48,6 +48,7 @@
     <Compile Include="IDataRepository.cs" />
     <Compile Include="Oddanie.cs" />
     <Compile Include="DataService.cs" />
+    <Compile Include="OwnFormatter.cs" />
     <Compile Include="Wypozyczenie.cs" />
     <Compile Include="DataContext.cs" />
     <Compile Include="DataRepository.cs" />
