@@ -24,7 +24,7 @@ namespace ClassLibrary1
         public override int GetHashCode()
         {
             return this.Name.GetHashCode();
-
+        }
         public string Serialize(ObjectIDGenerator idGenerator)
         {
             StringBuilder sb = new StringBuilder();

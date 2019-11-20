@@ -12,7 +12,6 @@ namespace ClassLibrary1
         public string Name { get; set; }
         public C GetC { get; set; }
 
-<<<<<<< HEAD
         public override bool Equals(object obj)
         {
             if (obj is null) return false;
@@ -27,7 +26,6 @@ namespace ClassLibrary1
         {
             return this.Name.GetHashCode();
         }
-=======
 
         public string Serialize(ObjectIDGenerator idGenerator)
         {
@@ -45,7 +43,6 @@ namespace ClassLibrary1
         }
 
 
->>>>>>> d23eda9d6c6b8cd8b3f86d8682320a7f3c2253ac
     }
 
 }
