@@ -8,5 +8,7 @@ namespace ClassLibrary1
         public Wypozyczenie(Wykaz wykaz, OpisStanu opisStanu, DateTime dataZdarzenia, Guid id) : base(wykaz, opisStanu, dataZdarzenia, id)
         {
         }
+
+        public Wypozyczenie() : base() { }
     }
 }

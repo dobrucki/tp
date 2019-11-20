@@ -44,15 +44,21 @@ namespace Zadanie2
             dataContext.Zdarzenia.Add(new Wypozyczenie(dataContext.Wykazy[4], dataContext.OpisyStanu[4], DateTime.Today, new Guid("d174090f-c973-4674-aa06-125190c337b5")));
 
             string path = "test.dat";
-
-
-            Stream serializationStream = File.Open(path, FileMode.Create, FileAccess.Write);
-            //Stream deserializationStream = File.Open(path, FileMode.Open, FileAccess.Read);
-            //formatter.Deserialize(deserializationStream);
             MyFormatter formatter = new MyFormatter();
-            formatter.Serialize(serializationStream, dataContext);
 
-            serializationStream.Close();
+
+            //Stream serializationStream = File.Open(path, FileMode.Create, FileAccess.Write);
+            Stream deserializationStream = File.Open(path, FileMode.Open, FileAccess.Read);
+            DataContext dx =  formatter.Deserialize(deserializationStream);
+            foreach(var xd in dx.Zdarzenia){
+                Console.WriteLine(xd.Wykaz.IdWykazu);
+            }
+            Console.ReadLine();
+
+
+            //formatter.Serialize(serializationStream, dataContext);
+
+            //serializationStream.Close();
 
 
         }
