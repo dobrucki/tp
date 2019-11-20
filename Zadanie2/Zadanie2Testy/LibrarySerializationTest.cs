@@ -86,5 +86,10 @@ namespace Zadanie2Testy
             Assert.AreEqual(opis1, deserialized[0]);
             Assert.AreEqual(opis2, deserialized[1]);
         }
+
+        public void ReccursionTest()
+        {
+
+        }
     }
 }

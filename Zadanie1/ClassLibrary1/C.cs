@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary1
 {
-    class C
+    public class C
     {
         public string Name { get; set; }
         B GetB { get; set; }

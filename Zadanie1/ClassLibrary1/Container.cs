@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary1
 {
-    class Container
+    public class Container
     {
         public List<A> ListA = new List<A>();
     }
