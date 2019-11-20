@@ -62,21 +62,17 @@ namespace Zadanie2
             while ((line = reader.ReadLine()) != null)
             {
                 List<string> splitedLine = line.Split(',').ToList();
-                Type type = asm.GetType(splitedLine[0]);
-                if (type != null)
-                {
-                    object instance = Activator.CreateInstance(type);
                     
                     if (splitedLine[0] == "ClassLibrary1.Wykaz+Adres")
                     {
-                        Wykaz.Adres adres = (Wykaz.Adres)instance;
+                        Wykaz.Adres adres = new Wykaz.Adres();
                         adres.Deserialize(splitedLine);
                         idAdresPair.Add(splitedLine[5], adres);
 
                     }
                     else if (splitedLine[0] == "ClassLibrary1.Wykaz")
                     {
-                        Wykaz wykaz = (Wykaz)instance;
+                        Wykaz wykaz = new Wykaz();
                         wykaz.Deserialize(splitedLine);
                         deserializedDataContext.Wykazy.Add(wykaz);
                         idWykazPair.Add(splitedLine[4], wykaz);
@@ -85,14 +81,14 @@ namespace Zadanie2
                     }
                     else if (splitedLine[0] == "ClassLibrary1.Katalog")
                     {
-                        Katalog katalog = (Katalog)instance;
+                        Katalog katalog = new Katalog();
                         katalog.Deserialize(splitedLine);
                         deserializedDataContext.Katalogi.Add(katalog.IdKatalogu, katalog);
                         idKatalogPair.Add(splitedLine[5], katalog);
                     }
                     else if (splitedLine[0] == "ClassLibrary1.OpisStanu")
                     {
-                        OpisStanu opisStanu = (OpisStanu)instance;
+                        OpisStanu opisStanu = new OpisStanu();
                         opisStanu.Deserialize(splitedLine);
                         deserializedDataContext.OpisyStanu.Add(opisStanu);
                         idOpisStanuPair.Add(splitedLine[4], opisStanu);
@@ -100,7 +96,7 @@ namespace Zadanie2
                     }
                     else if (splitedLine[0] == "ClassLibrary1.Wypozyczenie")
                     {
-                        Zdarzenie zdarzenie = (Wypozyczenie)instance;
+                        Zdarzenie zdarzenie = new Wypozyczenie();
                         zdarzenie.Deserialize(splitedLine);
                         deserializedDataContext.Zdarzenia.Add(zdarzenie);
                         zdarzenie.Wykaz = idWykazPair[splitedLine[1]];
@@ -108,13 +104,13 @@ namespace Zadanie2
                     }
                     else
                     {
-                        Zdarzenie zdarzenie = (Oddanie)instance;
+                        Zdarzenie zdarzenie = new Oddanie();
                         zdarzenie.Deserialize(splitedLine);
                         deserializedDataContext.Zdarzenia.Add(zdarzenie);
                         zdarzenie.Wykaz = idWykazPair[splitedLine[1]];
                         zdarzenie.OpisStanu = idOpisStanuPair[splitedLine[2]];
                     }
-                }
+                
                 
             }
 
