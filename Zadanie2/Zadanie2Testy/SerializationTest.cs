@@ -193,5 +193,35 @@ namespace Zadanie2Testy
             Assert.AreEqual(dataContextBeforeSerialization.Zdarzenia[0].OpisStanu.IdOpisuStanu, dataContextAfterSerialization.Zdarzenia[0].OpisStanu.IdOpisuStanu);
 
         }
+
+        [TestMethod]
+        public void MyFormatterTest_OneToMany()
+        {
+            DataContext dataContextBeforeSerialization = new DataContext();
+
+           
+
+            dataContextBeforeSerialization.Katalogi.Add(new Guid("b9b713a2-93ac-4696-96d9-ce1257b8835d"), new Katalog("Quo Vaids", "Henryk", "Sienkiewcz", new Guid("b9b713a2-93ac-4696-96d9-ce1257b8835d")));
+            dataContextBeforeSerialization.Katalogi.Add(new Guid("1df6b044-901b-452c-909e-4acdd52c1ba5"), new Katalog("Latarnik", "Henryk", "Sienkiewcz", new Guid("1df6b044-901b-452c-909e-4acdd52c1ba5")));
+
+            dataContextBeforeSerialization.OpisyStanu.Add(new OpisStanu(dataContextBeforeSerialization.Katalogi[new Guid("b9b713a2-93ac-4696-96d9-ce1257b8835d")], 1999, new Guid("434518ba-a2de-42df-ae6b-300eaf416053")));
+            dataContextBeforeSerialization.OpisyStanu.Add(new OpisStanu(dataContextBeforeSerialization.Katalogi[new Guid("b9b713a2-93ac-4696-96d9-ce1257b8835d")], 2010, new Guid("919a5dd9-4191-4eee-8a32-d8bbc74e36c4")));
+
+
+            string path = "test.dat";
+
+            MyFormatter myFormatter = new MyFormatter();
+            Stream serializationStream = File.Open(path, FileMode.Create, FileAccess.Write);
+            myFormatter.Serialize(serializationStream, dataContextBeforeSerialization);
+            serializationStream.Close();
+
+
+            Stream deserializationStream = File.Open(path, FileMode.Open, FileAccess.Read);
+            DataContext dataContextAfterSerialization = myFormatter.Deserialize(deserializationStream);
+            deserializationStream.Close();
+
+            Assert.AreEqual(dataContextBeforeSerialization.OpisyStanu[0].Katalog, dataContextBeforeSerialization.OpisyStanu[1].Katalog);
+            Assert.AreEqual(dataContextAfterSerialization.OpisyStanu[0].Katalog, dataContextAfterSerialization.OpisyStanu[1].Katalog);
+        }
     }
 }
