@@ -25,6 +25,7 @@ namespace ClassLibrary1
 
         }
 
+
         public string Serialize(ObjectIDGenerator idGenerator)
         {
             StringBuilder sb = new StringBuilder();
@@ -42,9 +43,5 @@ namespace ClassLibrary1
             DataZdarzenia = DateTime.Parse(splitString[3]); 
             Guid = new Guid(splitString[4]);
         }
-
-
-
-
     }
 }

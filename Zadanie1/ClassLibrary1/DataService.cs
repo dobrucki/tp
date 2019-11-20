@@ -53,7 +53,7 @@ namespace ClassLibrary1
                 {
                     return true;
                 }
-            } catch(System.InvalidOperationException e)
+            } catch(System.InvalidOperationException)
             {
             }
             return false;

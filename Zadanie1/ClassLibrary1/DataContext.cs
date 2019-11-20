@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Runtime.Serialization;
 
 
 namespace ClassLibrary1
@@ -12,4 +13,6 @@ namespace ClassLibrary1
         public ObservableCollection<Zdarzenie> Zdarzenia = new ObservableCollection<Zdarzenie>();
         public List<OpisStanu> OpisyStanu = new List<OpisStanu>();
     }
+
+
 }

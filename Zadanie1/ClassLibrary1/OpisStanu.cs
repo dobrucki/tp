@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ClassLibrary1
 {
-    public class OpisStanu
+    public class OpisStanu : IEquatable<OpisStanu>
     {
 
         public Katalog Katalog { get; set; }
@@ -41,5 +41,29 @@ namespace ClassLibrary1
             IdOpisuStanu = new Guid(splitString[3]);
         }
 
+        public bool Equals(OpisStanu other)
+        {
+            if (other is null) return false;
+            return this.IdOpisuStanu == other.IdOpisuStanu 
+                && this.Katalog.Equals(other.Katalog) 
+                && this.RokWydania == other.RokWydania;
+        }
+
+        public override bool Equals(object other)
+        {
+            if (other is OpisStanu)
+            {
+                return this.Equals(other as OpisStanu);
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public override int GetHashCode()
+        {
+            return this.IdOpisuStanu.GetHashCode();
+        }
     }
 }
