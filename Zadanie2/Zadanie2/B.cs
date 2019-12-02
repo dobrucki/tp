@@ -14,14 +14,6 @@ namespace Zadanie2
         public DateTime Date { get; set; }
         public A A { get; set; }
 
-        public void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            info.AddValue("Name", Name);
-            info.AddValue("Number", Number);
-            info.AddValue("Date", Date);
-            info.AddValue("A", A);
-        }
-
         public B(string name, float number, DateTime date, A a)
         {
             Name = name;
@@ -31,6 +23,14 @@ namespace Zadanie2
         }
 
         public B() { }
+
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("Name", Name);
+            info.AddValue("Number", Number);
+            info.AddValue("Date", Date);
+            info.AddValue("A", A);
+        }
 
         public B(SerializationInfo info, StreamingContext context)
         {

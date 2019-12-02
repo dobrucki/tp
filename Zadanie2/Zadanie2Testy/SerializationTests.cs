@@ -6,10 +6,10 @@ using Zadanie2;
 namespace Zadanie2Testy
 {
     [TestClass]
-    public class UnitTest1
+    public class SerializationTests
     {
         [TestMethod]
-        public void TestMethod1()
+        public void OwnFormatterTest()
         {
             A deserializaedA;
             C c = new C("Klasa C", 2.786F, DateTime.Now, null);
@@ -24,7 +24,7 @@ namespace Zadanie2Testy
             formatter.Serialize(stream, a);
             stream.Close();
 
-
+            
             Stream streamDeserialize = File.Open(filename, FileMode.Open, FileAccess.Read);
             deserializaedA = (A)formatter.Deserialize(streamDeserialize);
             streamDeserialize.Close();

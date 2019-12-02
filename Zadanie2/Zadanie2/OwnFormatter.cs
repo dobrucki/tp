@@ -6,7 +6,6 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Zadanie2
 {
@@ -34,10 +33,10 @@ namespace Zadanie2
             while ((line = reader.ReadLine()) != null)
             {
                 List<string> splitedLine = line.Split(',').ToList();
-                SerializationInfo info = new SerializationInfo(Type.GetType(splitedLine[3] + ", " + splitedLine[3].Split('.').ToList()[0]), new FormatterConverter());
-                for (int j = 4; j < splitedLine.Count-2; j+=2)
+                SerializationInfo info = new SerializationInfo(Type.GetType(splitedLine[5] + ", " + splitedLine[5].Split('.').ToList()[0]), new FormatterConverter());
+                for (int j = 7; j < splitedLine.Count-3; j+=3)
                 {
-                    if (splitedLine[j].Equals("Date"))
+                    if (splitedLine[j-1].Equals("System.DateTime"))
                         info.AddValue(splitedLine[j], DateTime.Parse(splitedLine[j+1]).ToLocalTime());
                     else
                         info.AddValue(splitedLine[j], splitedLine[j + 1]);
@@ -47,8 +46,9 @@ namespace Zadanie2
                 info.AddValue(splitedLine[splitedLine.Count -2], null);
 
 
-                idObjectPair.Add(splitedLine[1] ,Activator.CreateInstance(Type.GetType(splitedLine[3] + ", " + splitedLine[3].Split('.').ToList()[0]), info, Context));
-                objectIdPair.Add(idObjectPair[splitedLine[1]], splitedLine[11]);            }
+                idObjectPair.Add(splitedLine[2] ,Activator.CreateInstance(Type.GetType(splitedLine[5] + ", " + splitedLine[5].Split('.').ToList()[0]), info, Context));
+                objectIdPair.Add(idObjectPair[splitedLine[2]], splitedLine[splitedLine.Count-1]);            
+            }
 
             for (int i = 1; i <= idObjectPair.Count; i++)
             {
@@ -66,7 +66,7 @@ namespace Zadanie2
                     }
                 }
             }
-
+            reader.Close();
             return idObjectPair["1"];
 
         }
@@ -93,16 +93,11 @@ namespace Zadanie2
                         }    
 
                     }
-
                     else
                     {
-                        
                         WriteMember(item.Name, item.Value);
                     }
-
-
                 }
-
                 byte[] content = Encoding.UTF8.GetBytes(fileLine);
                 serializationStream.Write(content, 0, content.Length);
                 fileLine = "";
@@ -118,24 +113,24 @@ namespace Zadanie2
             }
             else
             {
-                fileLine += name + "," + IdGenerator.GetId(obj, out FirstTime) + "\n";
+                fileLine += obj.GetType() + "," + name + "," + IdGenerator.GetId(obj, out FirstTime) + "\n";
             }
              
         }
 
         protected void WriteString(object val, string name)
         {
-            fileLine += name + "," + (string)val + ",";
+            fileLine += val.GetType() + "," + name + "," + (string)val + ",";
         }
 
         protected override void WriteDateTime(DateTime val, string name)
         {
-            fileLine += name + "," + val.ToUniversalTime().ToString() + ",";
+            fileLine += val.GetType() + "," + name + ',' + val.ToUniversalTime().ToString() + ",";
         }
 
         protected override void WriteSingle(float val, string name)
         {
-            fileLine += name + "," + val.ToString("0.00", CultureInfo.InvariantCulture) + ",";
+            fileLine += val.GetType() + "," + name + ',' + val.ToString("0.00", CultureInfo.InvariantCulture) + ",";
         }
 
         protected override void WriteArray(object obj, string name, Type memberType)
@@ -180,7 +175,7 @@ namespace Zadanie2
 
         protected override void WriteInt64(long val, string name)
         {
-            fileLine += name + "," + val.ToString() + ",";
+            fileLine += val.GetType() + "," + name + "," + val.ToString() + ",";
         }
 
         protected override void WriteSByte(sbyte val, string name)
