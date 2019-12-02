@@ -41,14 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="A.cs" />
-    <Compile Include="B.cs" />
-    <Compile Include="C.cs" />
-    <Compile Include="Container.cs" />
     <Compile Include="IDataRepository.cs" />
     <Compile Include="Oddanie.cs" />
     <Compile Include="DataService.cs" />
-    <Compile Include="OwnFormatter.cs" />
     <Compile Include="Wypozyczenie.cs" />
     <Compile Include="DataContext.cs" />
     <Compile Include="DataRepository.cs" />

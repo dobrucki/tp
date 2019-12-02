@@ -5,7 +5,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7551870B-5693-48D6-91B0-4BE633EEAE81}</ProjectGuid>
+    <ProjectGuid>{CE0032E4-67D8-4D04-8091-833E952D8A58}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Zadanie2Testy</RootNamespace>
@@ -45,25 +45,17 @@
     <Reference Include="Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\MSTest.TestFramework.1.3.2\lib\net45\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LibrarySerializationTest.cs" />
-    <Compile Include="SerializationTest.cs" />
+    <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Zadanie1\ClassLibrary1\Zadanie1.csproj">
-      <Project>{81923506-e9e2-44b0-9401-20578bd32406}</Project>
-      <Name>Zadanie1</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Zadanie2\Zadanie2.csproj">
       <Project>{c6861d31-bc77-422b-ad39-3ffa73028e09}</Project>
       <Name>Zadanie2</Name>
