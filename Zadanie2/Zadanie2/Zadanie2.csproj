@@ -38,6 +38,9 @@
     <Reference Include="ClassLibrary1">
       <HintPath>..\..\Zadanie1\ClassLibrary1\bin\Debug\ClassLibrary1.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -51,8 +54,12 @@
     <Compile Include="A.cs" />
     <Compile Include="B.cs" />
     <Compile Include="C.cs" />
+    <Compile Include="JsonFormatter.cs" />
     <Compile Include="OwnFormatter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
