@@ -14,7 +14,7 @@ namespace Zadanie2
         public override ISurrogateSelector SurrogateSelector { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public override SerializationBinder Binder { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public override StreamingContext Context { get; set; }
-        public ObjectIDGenerator IdGenerator { get; set; }
+        private ObjectIDGenerator IdGenerator { get; set; }
 
         public OwnFormatter()
         {
@@ -71,7 +71,7 @@ namespace Zadanie2
 
         }
 
-        bool FirstTime;
+        private bool FirstTime;
         private string fileLine = "";
         public override void Serialize(Stream serializationStream, object graph)
         {
