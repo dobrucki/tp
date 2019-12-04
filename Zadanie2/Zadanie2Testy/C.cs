@@ -5,40 +5,41 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Zadanie2
+namespace Zadanie2Testy
 {
-    public class B :ISerializable
+    [Serializable]
+    public class C : ISerializable
     {
         public string Name { get; set; }
         public float Number { get; set; }
         public DateTime Date { get; set; }
-        public A A { get; set; }
+        public B B { get; set; }
 
-        public B(string name, float number, DateTime date, A a)
+        public C(string name, float number, DateTime date, B b)
         {
             Name = name;
             Number = number;
             Date = date;
-            A = a;
+            B = b;
         }
 
-        public B() { }
+        public C() { }
 
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             info.AddValue("Name", Name);
             info.AddValue("Number", Number);
             info.AddValue("Date", Date);
-            info.AddValue("A", A);
+            info.AddValue("B", B);
         }
 
-        public B(SerializationInfo info, StreamingContext context)
+        public C(SerializationInfo info, StreamingContext context)
         {
             // Reset the property value using the GetValue method.
             Name = (string)info.GetValue("Name", typeof(string));
             Number = (float)info.GetValue("Number", typeof(float));
             Date = (DateTime)info.GetValue("Date", typeof(DateTime));
-            A = (A)info.GetValue("A", typeof(A));
+            B = (B)info.GetValue("B", typeof(B));
         }
     }
 }
