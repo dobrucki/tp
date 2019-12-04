@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Zadanie2
+namespace Zadanie2Testy
 {
     public class B :ISerializable
     {
