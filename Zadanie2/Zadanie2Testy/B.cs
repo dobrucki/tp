@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Zadanie2Testy
 {
+    [Serializable]
     public class B :ISerializable
     {
         public string Name { get; set; }

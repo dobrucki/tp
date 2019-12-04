@@ -42,7 +42,9 @@ namespace Zadanie2Testy
             Assert.AreEqual(b.Name, bRef.Name);
             Assert.AreEqual(0.55f, bRef.Number);
             Assert.AreEqual(b.Date.Date, bRef.Date.Date);
-            
+
+            Assert.AreEqual(bRef.A, deserializaedA);
+
         }
 
         [TestMethod]
@@ -60,7 +62,6 @@ namespace Zadanie2Testy
             using (Stream stream = File.Open(filename, FileMode.Create, FileAccess.ReadWrite))
                 jsonFormatter.Serialize(stream, a);
 
-
             using (Stream streamDeserialize = File.Open(filename, FileMode.Open, FileAccess.Read))
                 deserializaedA = (A) jsonFormatter.Deserialize(streamDeserialize);
 
@@ -77,6 +78,10 @@ namespace Zadanie2Testy
             Assert.AreEqual(b.Name, bRef.Name);
             Assert.AreEqual(0.55f, bRef.Number);
             Assert.AreEqual(b.Date.Date, bRef.Date.Date);
+
+            //Assert.AreEqual(bRef.A, deserializaedA);
+
+
         }
     }
 }
