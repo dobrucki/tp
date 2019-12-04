@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 
 namespace Zadanie2
 {
-    public class JsonFormatter
+    public class JsonFormatter<T>
     {
         private static readonly JsonSerializerSettings _settings = new JsonSerializerSettings
         {
@@ -23,12 +23,12 @@ namespace Zadanie2
             serializationStream.Write(buffer, 0, buffer.Length);
         }
 
-        public object Deserialize(System.IO.Stream serializationStream)
+        public T Deserialize(System.IO.Stream serializationStream)
         {
             using (StreamReader streamReader = new StreamReader(serializationStream))
             {
                 string buffer = streamReader.ReadToEnd();
-                return JsonConvert.DeserializeObject(buffer, _settings);
+                return JsonConvert.DeserializeObject<T>(buffer, _settings);
             }
         }
     }

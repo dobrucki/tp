@@ -57,13 +57,13 @@ namespace Zadanie2Testy
             c.B = b;
 
             string filename = "serialized.json";
-            JsonFormatter jsonFormatter = new JsonFormatter();
+            JsonFormatter<A> jsonFormatter = new JsonFormatter<A>();
             File.Delete(filename);
             using (Stream stream = File.Open(filename, FileMode.Create, FileAccess.ReadWrite))
                 jsonFormatter.Serialize(stream, a);
 
             using (Stream streamDeserialize = File.Open(filename, FileMode.Open, FileAccess.Read))
-                deserializaedA = (A) jsonFormatter.Deserialize(streamDeserialize);
+                deserializaedA = jsonFormatter.Deserialize(streamDeserialize);
 
             Assert.AreEqual(a.Name, deserializaedA.Name);
             Assert.AreEqual(3.44f, deserializaedA.Number);
@@ -79,8 +79,7 @@ namespace Zadanie2Testy
             Assert.AreEqual(0.55f, bRef.Number);
             Assert.AreEqual(b.Date.Date, bRef.Date.Date);
 
-            //Assert.AreEqual(bRef.A, deserializaedA);
-
+            Assert.AreEqual(bRef.A, deserializaedA);
 
         }
     }

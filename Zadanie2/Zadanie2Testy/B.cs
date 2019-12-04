@@ -4,10 +4,12 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace Zadanie2Testy
 {
     [Serializable]
+    [JsonObject]
     public class B :ISerializable
     {
         public string Name { get; set; }
