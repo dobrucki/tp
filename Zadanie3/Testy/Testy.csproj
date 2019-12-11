@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="Stage3LinqTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Stage4Tests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
