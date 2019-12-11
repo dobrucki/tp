@@ -42,6 +42,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MyProduct.cs" />
+    <Compile Include="MyProductRepository.cs" />
+    <Compile Include="MyProductService.cs" />
     <Compile Include="Stage3Linq.cs" />
     <Compile Include="Production.designer.cs">
       <AutoGen>True</AutoGen>
