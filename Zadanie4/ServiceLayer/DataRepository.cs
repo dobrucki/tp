@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using DataLayer;
 
 namespace ServiceLayer
@@ -36,6 +37,7 @@ namespace ServiceLayer
             if (result != null)
             {
                 result.Name = name;
+                result.ModifiedDate = DateTime.Today;
                 db.SubmitChanges();
             }
 

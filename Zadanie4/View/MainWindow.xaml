@@ -6,25 +6,23 @@
         xmlns:local="clr-namespace:View"
         xmlns:vm="clr-namespace:ViewData.ViewModel;assembly=ViewData"
         mc:Ignorable="d"
-        Title="Location Editor" Height="500" Width="800">
+        Title="Location Editor" Height="500" Width="830">
     <Window.DataContext>
         <vm:MainViewModel />
     </Window.DataContext>
     <StackPanel Orientation="Vertical">
-        <Label Content="Product locations:" FontSize="18" FontWeight="Bold" Margin="7,0,10,0" Grid.Column="0" HorizontalAlignment="Center"/>
+        <Label Content="Product locations:" FontSize="18" FontWeight="Bold" Grid.Column="0" HorizontalAlignment="Center"/>
         <Grid Margin="10,0,10,10" Height="40">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="156"/>
-                <ColumnDefinition Width="156"/>
-                <ColumnDefinition Width="156"/>
-                <ColumnDefinition Width="156"/>
-                <ColumnDefinition Width="156"/>
+                <ColumnDefinition Width="202"/>
+                <ColumnDefinition Width="202"/>
+                <ColumnDefinition Width="203"/>
+                <ColumnDefinition Width="203"/>
             </Grid.ColumnDefinitions>
-            <Button BorderThickness="2" Content="Load Data" HorizontalAlignment="Center" Command="{Binding LoadDataCommand}" Margin="5,5,5,5" Width="134" FontSize="16" FontWeight="Bold"/>
-            <Button BorderThickness="2" Content="Add location" HorizontalAlignment="Center" Command="{Binding }" Margin="5,5,5,5" Width="136" Grid.Column="1" FontSize="16" FontWeight="Bold"/>
-            <Button BorderThickness="2" Content="Remove location" HorizontalAlignment="Center" Command="{Binding }" Margin="5,5,5,5" Width="134" Grid.Column="2" FontSize="16" FontWeight="Bold"/>
-            <Button BorderThickness="2" Content="Info" HorizontalAlignment="Center" Command="{Binding }" Margin="5,5,5,5" Width="134" Grid.Column="4" FontSize="16" FontWeight="Bold"/>
-            <Button BorderThickness="2" Content="Update" HorizontalAlignment="Center" Command="{Binding }" Margin="5,5,5,5" Width="134" Grid.Column="3" FontSize="16" FontWeight="Bold"/>
+            <Button BorderThickness="2" Content="Load Data" HorizontalAlignment="Center" Command="{Binding LoadDataCommand}" Margin="0,5,5,5" Width="134" FontSize="16" FontWeight="Bold"/>
+            <Button BorderThickness="2" Content="Add location" HorizontalAlignment="Center" Command="{Binding AddLocationCommand}" Margin="5,5,5,5" Width="134" Grid.Column="1" FontSize="16" FontWeight="Bold"/>
+            <Button BorderThickness="2" Content="Remove location" HorizontalAlignment="Center" Command="{Binding RemoveLocationCommand}" Margin="5,5,5,5" Width="134" Grid.Column="2" FontSize="16" FontWeight="Bold"/>
+            <Button BorderThickness="2" Content="Update" HorizontalAlignment="Center" Command="{Binding UpdateLocationCommand}" Margin="5,5,5,5" Width="134" Grid.Column="3" FontSize="16" FontWeight="Bold"/>
         </Grid>
         <ListBox ItemsSource="{Binding Locations, Mode=OneWay}" SelectedItem="{Binding Location}" Height="300
                  " Margin="10,0,10,10">
@@ -39,9 +37,13 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition/>
+                <RowDefinition/>
             </Grid.RowDefinitions>
-            <TextBlock Grid.Column="0" Margin="100,10,170,-27.96" Grid.ColumnSpan="2" FontSize="16" FontWeight="Bold">ID:</TextBlock>
-            <TextBox Text="{Binding ID}" Margin="159,10,56,-27.96" Grid.ColumnSpan="2" FontSize="16" />
+            
+            <TextBlock Grid.Column="0" Margin="91,0,170,0" Grid.ColumnSpan="2">Name:</TextBlock>
+            <TextBox Text="{Binding Name}" Margin="159,0,56,0" Grid.ColumnSpan="2"/>
+            <TextBlock Grid.Column="0" Margin="91,10,170,-27.96" Grid.ColumnSpan="2" Grid.Row="1">ID:</TextBlock>
+            <TextBox Text="{Binding ID}" Margin="159,10,56,-27.96" Grid.ColumnSpan="2" Grid.Row="1"/>
         </Grid>
     </StackPanel>
 </Window>
