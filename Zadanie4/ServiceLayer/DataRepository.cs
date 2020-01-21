@@ -8,18 +8,27 @@ namespace ServiceLayer
     {
         private ProductionDataContext db = new ProductionDataContext();
 
+
         public void AddLocation(Location location)
         {
-            
+            using (ProductionDataContext db = new ProductionDataContext())
+            {
                 db.Location.InsertOnSubmit(location);
                 db.SubmitChanges();
+            }
+                
             
         }
 
-        public Location GetLocation(int id)
+        public Location GetLocation(short id)
         {
-            Location result = db.Location.FirstOrDefault(loc => loc.LocationID == id);
-            return result;
+            using (ProductionDataContext db = new ProductionDataContext())
+            {
+                Location result = db.Location.FirstOrDefault(loc => loc.LocationID == id);
+                return result;
+            }
+            
+            
         }
 
         public IQueryable<Location> GetAllLocations()
@@ -32,25 +41,31 @@ namespace ServiceLayer
 
         public void UpdateLocation(int id, string name)
         {
-            Location result = db.Location.FirstOrDefault(l => l.LocationID == id);
-
-            if (result != null)
+            using (ProductionDataContext db = new ProductionDataContext())
             {
-                result.Name = name;
-                result.ModifiedDate = DateTime.Today;
-                db.SubmitChanges();
+                Location result = db.Location.FirstOrDefault(l => l.LocationID == id);
+
+                if (result != null)
+                {
+                    result.Name = name;
+                    result.ModifiedDate = DateTime.Today;
+                    db.SubmitChanges();
+                }
             }
 
         }
 
         public void DeleteLocation(int id)
         {
-            Location result = db.Location.FirstOrDefault(l => l.LocationID == id);
-
-            if (result != null)
+            using (ProductionDataContext db = new ProductionDataContext())
             {
-                db.Location.DeleteOnSubmit(result);
-                db.SubmitChanges();
+                Location result = db.Location.FirstOrDefault(l => l.LocationID == id);
+
+                if (result != null)
+                {
+                    db.Location.DeleteOnSubmit(result);
+                    db.SubmitChanges();
+                }
             }
         }
 

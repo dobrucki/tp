@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:View"
         xmlns:vm="clr-namespace:ViewData.ViewModel;assembly=ViewData"
         mc:Ignorable="d"
-        Title="Location Editor" Height="500" Width="830">
+        Title="Location Editor" Height="500" Width="850">
     <Window.DataContext>
         <vm:MainViewModel />
     </Window.DataContext>
@@ -14,15 +14,17 @@
         <Label Content="Product locations:" FontSize="18" FontWeight="Bold" Grid.Column="0" HorizontalAlignment="Center"/>
         <Grid Margin="10,0,10,10" Height="40">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="202"/>
-                <ColumnDefinition Width="202"/>
-                <ColumnDefinition Width="203"/>
-                <ColumnDefinition Width="203"/>
+                <ColumnDefinition Width="162"/>
+                <ColumnDefinition Width="162"/>
+                <ColumnDefinition Width="162"/>
+                <ColumnDefinition Width="162"/>
+                <ColumnDefinition Width="162"/>
             </Grid.ColumnDefinitions>
             <Button BorderThickness="2" Content="Load Data" HorizontalAlignment="Center" Command="{Binding LoadDataCommand}" Margin="0,5,5,5" Width="134" FontSize="16" FontWeight="Bold"/>
             <Button BorderThickness="2" Content="Add location" HorizontalAlignment="Center" Command="{Binding AddLocationCommand}" Margin="5,5,5,5" Width="134" Grid.Column="1" FontSize="16" FontWeight="Bold"/>
             <Button BorderThickness="2" Content="Remove location" HorizontalAlignment="Center" Command="{Binding RemoveLocationCommand}" Margin="5,5,5,5" Width="134" Grid.Column="2" FontSize="16" FontWeight="Bold"/>
             <Button BorderThickness="2" Content="Update" HorizontalAlignment="Center" Command="{Binding UpdateLocationCommand}" Margin="5,5,5,5" Width="134" Grid.Column="3" FontSize="16" FontWeight="Bold"/>
+            <Button BorderThickness="2" Content="Details" HorizontalAlignment="Center" Command="{Binding DetailsCommand}" Margin="5,5,5,5" Width="134" Grid.Column="4" FontSize="16" FontWeight="Bold"/>
         </Grid>
         <ListBox ItemsSource="{Binding Locations, Mode=OneWay}" SelectedItem="{Binding Location}" Height="300
                  " Margin="10,0,10,10">

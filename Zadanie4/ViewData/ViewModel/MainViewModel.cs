@@ -12,10 +12,12 @@ namespace ViewData.ViewModel
     {
         public MainViewModel()
         {
+            DataLayer = new DataRepository();
             LoadDataCommand = new RelayCommand(() => DataLayer = new DataRepository());
             AddLocationCommand = new RelayCommand(AddLocation);
             RemoveLocationCommand = new RelayCommand(RemoveLocation);
             UpdateLocationCommand = new RelayCommand(UpdateLocation);
+            DetailsCommand = new RelayCommand(Detials);
         }
 
 
@@ -58,21 +60,22 @@ namespace ViewData.ViewModel
 
         public void AddLocation()
         {
-            Location location = new Location
+            if (Name is null || Name == "")
             {
-                Name = Name,
-                ModifiedDate = DateTime.Today,
-                CostRate = 0,
-                Availability = 0
-            };
-
-            if (location.Name == null || location.Name == "")
-            {
-                
+                PopupHelper.Show("Location name can not be empty", "Add location error");
             }
+           
 
             else
             {
+                Location location = new Location
+                {
+                    Name = Name,
+                    ModifiedDate = DateTime.Today,
+                    CostRate = 0,
+                    Availability = 0
+                };
+
                 Task.Run(() =>
                 {
                     m_DataLayer.AddLocation(location);
@@ -88,7 +91,7 @@ namespace ViewData.ViewModel
             {
                 if (ID == 0)
                 {
-                    
+                    PopupHelper.Show("Location ID can not be equal 0", "Remove location error");
                 }
                 else
                 {
@@ -102,7 +105,7 @@ namespace ViewData.ViewModel
 
             if (Name == null || Name == "")
             {
-                
+                PopupHelper.Show("Location name can not be empty", "Update location error");
             }
             else
             {
@@ -113,7 +116,19 @@ namespace ViewData.ViewModel
             }
         }
 
-       
+        public void Detials()
+        {
+            Task.Run(() =>
+            {
+                Locations = new ObservableCollection<Location>();
+                Locations.Add(m_DataLayer.GetLocation(ID));
+                Location = m_DataLayer.GetLocation(ID);
+            });
+            PopupHelper.ShowDetails();
+        }
+
+
+
 
         public RelayCommand LoadDataCommand
         {
@@ -135,9 +150,16 @@ namespace ViewData.ViewModel
             get; private set;
         }
 
+        public RelayCommand DetailsCommand
+        {
+            get; private set;
+        }
+
         private DataRepository m_DataLayer;
         private ObservableCollection<Location> m_Locations;
         private Location m_Location;
+
+        public IPopupHelper PopupHelper { get; set; }
         public string Name { get; set; }
         public short ID { get; set; }
     }

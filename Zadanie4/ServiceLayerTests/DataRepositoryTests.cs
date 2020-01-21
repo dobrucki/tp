@@ -23,7 +23,7 @@ namespace ServiceLayerTests
         {
             Location newLocation = new Location
             {
-                Name = "Lodz",
+                Name = "Home",
                 CostRate = 0.000M,
                 Availability = 40.00M,
                 ModifiedDate = DateTime.Today,
@@ -36,7 +36,7 @@ namespace ServiceLayerTests
         [TestMethod]
         public void DeleteLocationTest()
         {
-            repo.DeleteLocation(77);
+            repo.DeleteLocation(98);
             IQueryable<Location> locations = repo.GetAllLocations();
             Assert.AreEqual(14, locations.ToList().Count);
         }

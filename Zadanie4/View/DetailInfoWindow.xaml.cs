@@ -10,29 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using ViewData.ViewModel;
 
 namespace View
 {
     /// <summary>
-    /// Logika interakcji dla klasy MainWindow.xaml
+    /// Logika interakcji dla klasy DetailInfoWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class DetailInfoWindow : Window
     {
-        public MainWindow()
+        public DetailInfoWindow()
         {
             InitializeComponent();
-            
         }
-
-        protected override void OnInitialized(EventArgs e)
-        {
-            base.OnInitialized(e);
-            MainViewModel _vm = (MainViewModel)DataContext;
-            _vm.PopupHelper = new PopupHelper();
-        }
-
     }
 }
