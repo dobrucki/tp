@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading;
 using DataLayer;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ViewData;
@@ -15,9 +16,11 @@ namespace ViewDataTests
         {
             IPopupHelper mockPopuplHelper = new MockPopupHelper();
             MainViewModel viewModel = new MainViewModel();
+            viewModel.LoadDataCommand.Execute(null);
             viewModel.PopupHelper = mockPopuplHelper;
             viewModel.ErrorCollection.Add("Name", "Niepoprawny");
             viewModel.AddLocationCommand.Execute(null);
+            Thread.Sleep(500);
             Assert.AreEqual(14, viewModel.DataLayer.GetAllLocations().ToList().Count);
 
         }
@@ -28,6 +31,7 @@ namespace ViewDataTests
             MainViewModel viewModel = new MainViewModel();
             viewModel.DataLayer = null;
             viewModel.LoadDataCommand.Execute(null);
+            Thread.Sleep(500);
             Assert.AreEqual(14, viewModel.DataLayer.GetAllLocations().ToList().Count);
         }
 
@@ -42,6 +46,7 @@ namespace ViewDataTests
             viewModel.Name = "Lodz";
             viewModel.ID = 1;
             viewModel.UpdateLocationCommand.Execute(null);
+            Thread.Sleep(500);
             Assert.AreEqual("Warsaw", viewModel.DataLayer.GetLocation(1).Name);
         }
 
@@ -55,6 +60,7 @@ namespace ViewDataTests
             viewModel.PopupHelper = mockPopuplHelper;
             viewModel.ID = 0;
             viewModel.RemoveLocationCommand.Execute(null);
+            Thread.Sleep(500);
             Assert.AreEqual(14, viewModel.DataLayer.GetAllLocations().ToList().Count);
         }
     }

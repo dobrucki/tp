@@ -46,7 +46,7 @@ namespace ViewData.ViewModel
             }
         }
 
-        public DataRepository DataLayer
+        public IDataRepository DataLayer
         {
             get { return m_DataLayer; }
             set
@@ -156,7 +156,7 @@ namespace ViewData.ViewModel
             get; private set;
         }
 
-        private DataRepository m_DataLayer;
+        private IDataRepository m_DataLayer;
         private ObservableCollection<Location> m_Locations;
         private Location m_Location;
         private string m_name;

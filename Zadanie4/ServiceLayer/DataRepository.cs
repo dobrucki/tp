@@ -4,7 +4,7 @@ using DataLayer;
 
 namespace ServiceLayer
 {
-    public class DataRepository
+    public class DataRepository : IDataRepository
     {
         private ProductionDataContext db = new ProductionDataContext();
 
