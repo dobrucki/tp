@@ -36,7 +36,7 @@ namespace ServiceLayerTests
         [TestMethod]
         public void DeleteLocationTest()
         {
-            repo.DeleteLocation(98);
+            repo.DeleteLocation(120);
             IQueryable<Location> locations = repo.GetAllLocations();
             Assert.AreEqual(14, locations.ToList().Count);
         }

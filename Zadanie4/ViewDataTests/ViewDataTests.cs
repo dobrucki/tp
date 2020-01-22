@@ -16,7 +16,7 @@ namespace ViewDataTests
             IPopupHelper mockPopuplHelper = new MockPopupHelper();
             MainViewModel viewModel = new MainViewModel();
             viewModel.PopupHelper = mockPopuplHelper;
-            viewModel.Name = null;
+            viewModel.ErrorCollection.Add("Name", "Niepoprawny");
             viewModel.AddLocationCommand.Execute(null);
             Assert.AreEqual(14, viewModel.DataLayer.GetAllLocations().ToList().Count);
 
@@ -38,7 +38,8 @@ namespace ViewDataTests
             IPopupHelper mockPopuplHelper = new MockPopupHelper();
             MainViewModel viewModel = new MainViewModel();
             viewModel.PopupHelper = mockPopuplHelper;
-            viewModel.Name = "";
+            viewModel.ErrorCollection.Add("Name", "Niepoprawny");
+            viewModel.Name = "Lodz";
             viewModel.ID = 1;
             viewModel.UpdateLocationCommand.Execute(null);
             Assert.AreEqual("Warsaw", viewModel.DataLayer.GetLocation(1).Name);
@@ -52,6 +53,7 @@ namespace ViewDataTests
             IPopupHelper mockPopuplHelper = new MockPopupHelper();
             MainViewModel viewModel = new MainViewModel();
             viewModel.PopupHelper = mockPopuplHelper;
+            viewModel.ID = 0;
             viewModel.RemoveLocationCommand.Execute(null);
             Assert.AreEqual(14, viewModel.DataLayer.GetAllLocations().ToList().Count);
         }
