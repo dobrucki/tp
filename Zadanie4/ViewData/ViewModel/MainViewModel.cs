@@ -4,12 +4,14 @@ using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using ViewData.MVVMLight;
-using System.Linq;
+using System.ComponentModel;
+using System.Collections.Generic;
 
 namespace ViewData.ViewModel
 {
-    public class MainViewModel : ViewModelBase
+    public class MainViewModel : ViewModelBase, IDataErrorInfo
     {
+
         public MainViewModel()
         {
             DataLayer = new DataRepository();
@@ -60,9 +62,9 @@ namespace ViewData.ViewModel
 
         public void AddLocation()
         {
-            if (Name is null || Name == "")
+            if (ErrorCollection["Name"] != null)
             {
-                PopupHelper.Show("Location name can not be empty", "Add location error");
+                PopupHelper.Show(ErrorCollection["Name"], "Add location error");
             }
            
 
@@ -89,23 +91,18 @@ namespace ViewData.ViewModel
         {
             Task.Run(() =>
             {
-                if (ID == 0)
-                {
-                    PopupHelper.Show("Location ID can not be equal 0", "Remove location error");
-                }
-                else
-                {
-                    m_DataLayer.DeleteLocation(ID);
-                }
+               
+                   m_DataLayer.DeleteLocation(ID);
+                
             });
         }
 
         public void UpdateLocation()
         {
 
-            if (Name == null || Name == "")
+            if (ErrorCollection["Name"] != null)
             {
-                PopupHelper.Show("Location name can not be empty", "Update location error");
+                PopupHelper.Show(ErrorCollection["Name"], "Update location error");
             }
             else
             {
@@ -119,6 +116,16 @@ namespace ViewData.ViewModel
         public void Detials()
         {
             PopupHelper.ShowDetails();
+        }
+
+        public string Name
+        {
+            get { return m_name; }
+            set
+            {
+                m_name = value;
+                RaisePropertyChanged();
+            }
         }
 
 
@@ -152,10 +159,40 @@ namespace ViewData.ViewModel
         private DataRepository m_DataLayer;
         private ObservableCollection<Location> m_Locations;
         private Location m_Location;
+        private string m_name;
 
         public IPopupHelper PopupHelper { get; set; }
-        public string Name { get; set; }
         public short ID { get; set; }
+
+        public string Error { get { return null; } }
+
+        public Dictionary<string, string> ErrorCollection { get; private set; } = new Dictionary<string, string>();
+
+        public string this[string name]
+        {
+            get
+            {
+                string result = null;
+
+                switch (name)
+                {
+                    case "Name":
+                        if (string.IsNullOrWhiteSpace(Name))
+                            result = "Name cannot be empty";
+                        else if (Name.Length < 3)
+                            result = "Name must be a minimum of 3 characters.";
+                        break;
+                }
+
+                if (ErrorCollection.ContainsKey(name))
+                    ErrorCollection[name] = result;
+                else if (result != null)
+                    ErrorCollection.Add(name, result);
+
+                RaisePropertyChanged("ErrorCollection");
+                return result;
+            }
+        }
     }
 
 

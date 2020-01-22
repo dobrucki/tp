@@ -43,7 +43,7 @@
             </Grid.RowDefinitions>
             
             <TextBlock Grid.Column="0" Margin="91,0,170,0" Grid.ColumnSpan="2">Name:</TextBlock>
-            <TextBox Text="{Binding Name}" Margin="159,0,56,0" Grid.ColumnSpan="2"/>
+            <TextBox Text="{Binding Name, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" ToolTip="{Binding ErrorCollection[Name]}" Margin="159,0,56,0" Grid.ColumnSpan="2"/>
             <TextBlock Grid.Column="0" Margin="91,10,170,-27.96" Grid.ColumnSpan="2" Grid.Row="1">ID:</TextBlock>
             <TextBox Text="{Binding ID}" Margin="159,10,56,-27.96" Grid.ColumnSpan="2" Grid.Row="1"/>
         </Grid>
