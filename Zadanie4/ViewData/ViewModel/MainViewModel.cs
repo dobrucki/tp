@@ -118,12 +118,6 @@ namespace ViewData.ViewModel
 
         public void Detials()
         {
-            Task.Run(() =>
-            {
-                Locations = new ObservableCollection<Location>();
-                Locations.Add(m_DataLayer.GetLocation(ID));
-                Location = m_DataLayer.GetLocation(ID);
-            });
             PopupHelper.ShowDetails();
         }
 

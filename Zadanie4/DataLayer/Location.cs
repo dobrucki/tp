@@ -10,12 +10,17 @@ namespace DataLayer
     {
         public override string ToString()
         {
-            return "Id: " + LocationID + " " + "Name: " + Name;
+            return "Id: " + LocationID + " Name: " + Name;
         }
 
         public string LocationToString
         {
             get => ToString();
+        }
+
+        public string LocationDetailsToString
+        {
+            get => ToString() + " Modified Date: " + ModifiedDate + " Availability: " + Availability;
         }
     }
 }
